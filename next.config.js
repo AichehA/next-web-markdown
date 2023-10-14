@@ -1,6 +1,6 @@
 // const withContentlayer = require("next-contentlayer");
 
-const repo = "next-web-markdown";
+const repo = "aicheha.github.io/next-web-markdown";
 const assetPrefix = `/${repo}/`;
 const basePath = `/${repo}`;
 
