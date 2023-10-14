@@ -8,8 +8,11 @@ const basePath = `/${repo}`;
 const nextConfig = {
   reactStrictMode: true,
   // assetPrefix: assetPrefix,
-  // basePath: basePath,
+  basePath: "/next-web-markdown",
   output: "export",
+  images: {
+    unoptimized: true,
+  },
 };
 
 module.exports = nextConfig;
