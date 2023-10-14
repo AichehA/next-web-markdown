@@ -7,8 +7,6 @@ const basePath = `/${repo}`;
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  assetPrefix: assetPrefix,
-  basePath: basePath,
   output: "export",
 };
 

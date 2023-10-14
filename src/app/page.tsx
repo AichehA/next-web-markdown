@@ -1,6 +1,30 @@
+import { Mdx } from '@/components/mdx-components'
+import { DocsPageHeader } from '@/components/page-header'
+import { allDocs } from 'contentlayer/generated'
 import Image from 'next/image'
+import { notFound } from 'next/navigation'
 
-export default function Home() {
+async function getDocFromParams() {
+  const doc = allDocs.find((doc) => doc.slugAsParams === 'hello-world')
+  console.log('doc :', doc)
+
+  if (!doc) {
+    null
+  }
+
+  return doc
+}
+
+
+export default async function Home() {
+
+  const doc = await getDocFromParams()
+  console.log('await doc :', doc)
+
+  if (!doc) {
+    notFound()
+  }
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">      
 
@@ -14,6 +38,9 @@ export default function Home() {
           priority
         />
       </div>
+
+      <DocsPageHeader heading={doc.title} text={doc.description} />
+        <Mdx code={doc.body.code} />
 
       <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
         <a

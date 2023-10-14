@@ -14,6 +14,7 @@ interface DocPageProps {
 
 async function getDocFromParams(slug: string) {
   const doc = allDocs.find((doc) => doc.slugAsParams === slug)
+  console.log('doc :', doc)
 
   if (!doc) {
     null
