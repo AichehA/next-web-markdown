@@ -11,9 +11,14 @@ interface DocPageProps {
   };
 }
 
+export async function generateStaticParams() {
+  return allDocs.map((doc) => ({
+    slug: doc.slugAsParams,
+  }));
+}
+
 async function getDocFromParams(slug: string) {
   const doc = allDocs.find((doc) => doc.slugAsParams === slug);
-  console.log("doc :", doc);
 
   if (!doc) {
     null;

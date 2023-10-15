@@ -6,7 +6,6 @@ import { notFound } from "next/navigation";
 
 async function getDocFromParams() {
   const doc = allDocs.find((doc) => doc.slugAsParams === "hello-world");
-  console.log("doc :", doc);
 
   if (!doc) {
     null;
@@ -17,7 +16,6 @@ async function getDocFromParams() {
 
 export default async function Home() {
   const doc = await getDocFromParams();
-  console.log("await doc :", doc);
 
   if (!doc) {
     notFound();
