@@ -14,6 +14,16 @@ const computedFields = {
     type: "string",
     resolve: (doc) => doc._raw.flattenedPath.split("/").slice(1).join("/"),
   },
+  readTime: {
+    type: "string",
+    resolve: (post) => {
+      const wordsPerMinute = 200;
+      const noOfWords = post.body.raw.split(/\s/g).length;
+      const minutes = noOfWords / wordsPerMinute;
+      const readTime = Math.ceil(minutes);
+      return readTime;
+    },
+  },
 };
 
 export const Doc = defineDocumentType(() => ({

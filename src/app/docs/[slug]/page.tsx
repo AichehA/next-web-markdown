@@ -4,6 +4,8 @@ import { allDocs } from "contentlayer/generated";
 import { Metadata } from "next";
 import { Mdx } from "@/components/mdx-components";
 import { DocsPageHeader } from "@/components/page-header";
+import { DashboardTableOfContents } from "@/components/toc";
+import { getTableOfContents } from "@/lib/toc";
 
 interface DocPageProps {
   params: {
@@ -46,26 +48,25 @@ export async function generateMetadata({
   return {
     title: doc.title,
     description: doc.description,
-    // openGraph: {
-    //   title: doc.title,
-    //   description: doc.description,
-    //   type: "article",
-    //   url: absoluteUrl(doc.slug),
-    //   images: [
-    //     {
-    //       url: ogUrl.toString(),
-    //       width: 1200,
-    //       height: 630,
-    //       alt: doc.title,
-    //     },
-    //   ],
-    // },
-    // twitter: {
-    //   card: "summary_large_image",
-    //   title: doc.title,
-    //   description: doc.description,
-    //   images: [ogUrl.toString()],
-    // },
+    openGraph: {
+      title: doc.title,
+      description: doc.description,
+      type: "article",
+      url: "https://aicheha.github.io/next-web-markdown" + doc.slug,
+      images: [
+        {
+          url: "https://images.pexels.com/photos/5409751/pexels-photo-5409751.jpeg",
+          width: 1200,
+          height: 630,
+          alt: doc.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: doc.title,
+      description: doc.description,
+    },
   };
 }
 
@@ -76,15 +77,21 @@ export default async function DocPage({ params }: DocPageProps) {
     notFound();
   }
 
+  const toc = await getTableOfContents(doc.body.raw);
+
   return (
-    <div>
-      <main className="p-6">
-        <div className="mx-auto w-full min-w-0">
-          <DocsPageHeader heading={doc.title} text={doc.description} />
-          <Mdx code={doc.body.code} />
-          <hr className="my-4 md:my-6" />
+    <main className="relative py-6 lg:gap-10 lg:py-10 xl:grid xl:grid-cols-[1fr_300px]">
+      <div className="mx-auto w-full min-w-0">
+        <DocsPageHeader heading={doc.title} text={doc.description} />
+        <p>{doc.readTime} min read</p>
+        <Mdx code={doc.body.code} />
+        <hr className="my-4 md:my-6" />
+      </div>
+      <div className="hidden text-sm xl:block">
+        <div className="sticky top-16 -mt-10 max-h-[calc(var(--vh)-4rem)] overflow-y-auto pt-10">
+          <DashboardTableOfContents toc={toc} />
         </div>
-      </main>
-    </div>
+      </div>
+    </main>
   );
 }

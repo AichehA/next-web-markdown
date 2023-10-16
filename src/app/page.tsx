@@ -35,6 +35,7 @@ export default async function Home() {
       </div>
 
       <DocsPageHeader heading={doc.title} text={doc.description} />
+      <p>{doc.readTime} min read</p>
       <Mdx code={doc.body.code} />
 
       <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
