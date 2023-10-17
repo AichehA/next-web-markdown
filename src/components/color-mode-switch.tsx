@@ -1,16 +1,17 @@
 "use client";
 
-import * as React from "react";
 import { useTheme } from "next-themes";
 
 import { Icons } from "@/components/icons";
+import { useMounted } from "@/hooks/use-mounted";
 
 export function ColorModeSwitch() {
+  const mounted = useMounted();
   const { setTheme, resolvedTheme } = useTheme();
 
   return (
     <>
-      {resolvedTheme === "dark" ? (
+      {mounted && resolvedTheme === "dark" ? (
         <div onClick={() => setTheme("light")}>
           <Icons.sun />
         </div>
