@@ -1,10 +1,11 @@
-import * as React from "react"
-import Image from "next/image"
-import { useMDXComponent } from "next-contentlayer/hooks"
+import * as React from "react";
+import Image from "next/image";
+import { useMDXComponent } from "next-contentlayer/hooks";
 
-import { cn } from "@/lib/utils"
-import { Callout } from "@/components/callout"
-import { MdxCard } from "@/components/mdx-card"
+import { cn } from "@/lib/utils";
+import { Callout } from "@/components/callout";
+import { MdxCard } from "@/components/mdx-card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const components = {
   h1: ({ className, ...props }) => (
@@ -149,19 +150,27 @@ const components = {
   ),
   Image,
   Callout,
+  Tabs: ({ value, ...props }) => <Tabs value={value} {...props}></Tabs>,
+  TabsList: ({ ...props }) => <TabsList {...props}></TabsList>,
+  TabsTrigger: ({ value, ...props }) => (
+    <TabsTrigger value={value} {...props}></TabsTrigger>
+  ),
+  TabsContent: ({ value, ...props }) => (
+    <TabsContent value={value} {...props}></TabsContent>
+  ),
   Card: MdxCard,
-}
+};
 
 interface MdxProps {
-  code: string
+  code: string;
 }
 
 export function Mdx({ code }: MdxProps) {
-  const Component = useMDXComponent(code)
+  const Component = useMDXComponent(code);
 
   return (
     <div className="mdx">
       <Component components={components} />
     </div>
-  )
+  );
 }
