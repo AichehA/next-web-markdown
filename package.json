@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently --names 'Next,Contentlayer' --prefix-colors 'yellow,blue' --kill-others 'pnpm:next:dev' 'pnpm:contentlayer:dev'",
+    "dev": "concurrently --names Next,Contentlayer --prefix-colors 'yellow,blue' --kill-others 'pnpm:next:dev' 'pnpm:contentlayer:dev'",
     "next:dev": "next dev",
     "contentlayer:dev": "contentlayer dev",
     "build": "contentlayer build && next build",
