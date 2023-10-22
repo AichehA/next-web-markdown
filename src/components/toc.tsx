@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-import { TableOfContents } from "@/lib/toc";
+import { TableOfContents, Item } from "@/lib/toc";
 import { cn } from "@/lib/utils";
 import { useMounted } from "@/hooks/use-mounted";
 
@@ -92,17 +92,7 @@ function Tree({ tree, level = 1, activeItem }: TreeProps) {
       {tree.items.map((item, index) => {
         return item ? (
           <li key={index} className={cn("mt-0 pt-2")}>
-            <a
-              href={item.url}
-              className={cn(
-                "inline-block no-underline",
-                item.url === `#${activeItem}`
-                  ? "font-medium text-primary"
-                  : "text-sm text-muted-foreground"
-              )}
-            >
-              {item.title}
-            </a>
+            <TreeTitle item={item} activeItem={activeItem} />
             {item.items?.length ? (
               <Tree tree={item} level={level + 1} activeItem={activeItem} />
             ) : null}
@@ -110,5 +100,26 @@ function Tree({ tree, level = 1, activeItem }: TreeProps) {
         ) : null;
       })}
     </ul>
+  ) : null;
+}
+
+interface TreeTitleProps {
+  item: Item;
+  activeItem?: string | null;
+}
+
+function TreeTitle({ item, activeItem }: TreeTitleProps) {
+  return item.title ? (
+    <a
+      href={item.url}
+      className={cn(
+        "inline-block no-underline",
+        item.url === `#${activeItem}`
+          ? "font-medium text-primary"
+          : "text-sm text-muted-foreground"
+      )}
+    >
+      {item.title}
+    </a>
   ) : null;
 }
