@@ -9,18 +9,19 @@ import { getTableOfContents } from "@/lib/toc";
 
 interface DocPageProps {
   params: {
-    slug: string;
+    slug: string[];
   };
 }
 
 export async function generateStaticParams() {
   return allDocs.map((doc) => ({
-    slug: doc.slugAsParams,
+    slug: doc.slugAsParams.split("/"),
   }));
 }
 
-async function getDocFromParams(slug: string) {
-  const doc = allDocs.find((doc) => doc.slugAsParams === slug);
+async function getDocFromParams(slug: string[]) {
+  const slugPath = slug?.join("/") || "";
+  const doc = allDocs.find((doc) => doc.slugAsParams === slugPath);
 
   if (!doc) {
     null;

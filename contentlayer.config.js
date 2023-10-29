@@ -4,6 +4,8 @@ import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
 
+const locates = ["fr", "en"];
+
 /** @type {import('contentlayer/source-files').ComputedFields} */
 const computedFields = {
   slug: {
@@ -22,6 +24,14 @@ const computedFields = {
       const minutes = noOfWords / wordsPerMinute;
       const readTime = Math.ceil(minutes);
       return readTime;
+    },
+  },
+  locale: {
+    type: "string",
+    resolve: (doc) => {
+      const path = doc._raw.sourceFilePath;
+      const pathArray = path.split("/");
+      return locates.includes(pathArray.at(1)) ? pathArray.at(1) : "fr";
     },
   },
 };
