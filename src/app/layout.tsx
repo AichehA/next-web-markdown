@@ -1,9 +1,10 @@
 import "./globals.css";
-import "katex/dist/katex.min.css"
+import "katex/dist/katex.min.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ColorModeSwitch } from "@/components/color-mode-switch";
 import { ThemeProvider } from "@/components/theme-provider";
+import { LangugeSwitch } from "@/components/languge-switch";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,6 +23,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <ColorModeSwitch />
+          <LangugeSwitch />
           {children}
         </ThemeProvider>
       </body>

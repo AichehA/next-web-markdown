@@ -5,7 +5,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 
 async function getDocFromParams() {
-  const doc = allEnDocs.find((doc) => doc.slugAsParams === "hello-world");
+  const doc = allEnDocs.find((doc) => doc.slugAsParams === "home");
 
   if (!doc) {
     null;
@@ -36,8 +36,6 @@ export default async function Home() {
 
       <DocsPageHeader heading={doc.title} text={doc.description} />
       <p>{doc.readTime} min read</p>
-      <Mdx code={doc.body.code} />
-
       <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
         <a
           href="docs/hello-world"
@@ -55,6 +53,7 @@ export default async function Home() {
           </p>
         </a>
       </div>
+      <Mdx code={doc.body.code} />
     </main>
   );
 }

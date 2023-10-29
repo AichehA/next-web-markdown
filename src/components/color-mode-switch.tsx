@@ -1,25 +1,37 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { cn } from "@/lib/utils";
 import { Icons } from "@/components/icons";
-import { useMounted } from "@/hooks/use-mounted";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
+import { Button } from "./ui/button";
 
 export function ColorModeSwitch() {
-  const mounted = useMounted();
-  const { setTheme, resolvedTheme } = useTheme();
+  const { setTheme } = useTheme();
 
   return (
-    <>
-      {mounted && resolvedTheme === "dark" ? (
-        <div onClick={() => setTheme("light")} className={cn("cursor-pointer")}>
-          <Icons.sun />
-        </div>
-      ) : (
-        <div onClick={() => setTheme("dark")} className={cn("cursor-pointer")}>
-          <Icons.moon />
-        </div>
-      )}
-    </>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="ghost" size="sm" className="h-8 w-8 px-0">
+          <Icons.sun className="rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+          <Icons.moon className="absolute rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+          <span className="sr-only">Toggle theme</span>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        <DropdownMenuItem onClick={() => setTheme("light")}>
+          <Icons.sun className="mr-2 h-4 w-4" />
+          <span>Light</span>
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme("dark")}>
+          <Icons.moon className="mr-2 h-4 w-4" />
+          <span>Dark</span>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }
