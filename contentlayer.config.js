@@ -16,7 +16,14 @@ const computedFields = {
   },
   slugAsParams: {
     type: "string",
-    resolve: (doc) => doc._raw.flattenedPath.split("/").slice(1).join("/"),
+    resolve: (doc) => {
+      const path = doc._raw.flattenedPath;
+      const pathArray = path.split("/");
+      const locale = locates.includes(pathArray.at(0)) ? pathArray.at(0) : "fr";
+      return locale === "fr"
+        ? pathArray.slice(1).join("/")
+        : pathArray.slice(2).join("/");
+    },
   },
   readTime: {
     type: "string",
@@ -33,7 +40,7 @@ const computedFields = {
     resolve: (doc) => {
       const path = doc._raw.sourceFilePath;
       const pathArray = path.split("/");
-      return locates.includes(pathArray.at(1)) ? pathArray.at(1) : "fr";
+      return locates.includes(pathArray.at(0)) ? pathArray.at(0) : "fr";
     },
   },
 };
@@ -58,9 +65,29 @@ export const Doc = defineDocumentType(() => ({
   computedFields,
 }));
 
+export const EnDoc = defineDocumentType(() => ({
+  name: "EnDoc",
+  filePathPattern: `en/docs/**/*.mdx`,
+  contentType: "mdx",
+  fields: {
+    title: {
+      type: "string",
+      required: true,
+    },
+    description: {
+      type: "string",
+    },
+    published: {
+      type: "boolean",
+      default: true,
+    },
+  },
+  computedFields,
+}));
+
 export default makeSource({
   contentDirPath: "./src/content",
-  documentTypes: [Doc],
+  documentTypes: [Doc, EnDoc],
   mdx: {
     remarkPlugins: [remarkGfm, remarkMath],
     rehypePlugins: [

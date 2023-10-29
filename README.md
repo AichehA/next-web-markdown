@@ -2,6 +2,12 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
+http://localhost:3000/next-web-markdown/
+http://localhost:3000/next-web-markdown/docs/hello-world
+
+http://localhost:3000/next-web-markdown/en/
+http://localhost:3000/next-web-markdown/en/docs/hello-world
+
 First, run the development server:
 
 ```bash
