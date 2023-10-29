@@ -3,6 +3,8 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
 
 const locates = ["fr", "en"];
 
@@ -60,7 +62,7 @@ export default makeSource({
   contentDirPath: "./src/content",
   documentTypes: [Doc],
   mdx: {
-    remarkPlugins: [remarkGfm],
+    remarkPlugins: [remarkGfm, remarkMath],
     rehypePlugins: [
       rehypeSlug,
       [
@@ -91,6 +93,7 @@ export default makeSource({
           },
         },
       ],
+      rehypeKatex,
     ],
   },
 });

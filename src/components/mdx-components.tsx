@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { Callout } from "@/components/callout";
 import { MdxCard } from "@/components/mdx-card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { TabsArabe, TabsArabeAr, TabsArabeFr } from "@/components/ui/tabsArabe";
 
 const components = {
   h1: ({ className, ...props }) => (
@@ -159,6 +160,9 @@ const components = {
     <TabsContent value={value} {...props}></TabsContent>
   ),
   Card: MdxCard,
+  TabsArabe,
+  TabsArabeFr,
+  TabsArabeAr,
 };
 
 interface MdxProps {
