@@ -39,16 +39,19 @@ function getSlugEn(slug: string, currentLang: string) {
   return doc.slug;
 }
 
+export function getCurrentLang(currentSlug: string): string {
+  const currentSlugArray = currentSlug.split("/");
+  return locates.includes(currentSlugArray.at(1)!)
+    ? currentSlugArray.at(1)!
+    : "fr";
+}
+
 export function LangugeSwitch() {
   const { push } = useRouter();
   const currentSlug = usePathname();
-  const currentSlugArray = currentSlug.split("/");
-  const currentLang = locates.includes(currentSlugArray.at(1)!)
-    ? currentSlugArray.at(1)!
-    : "fr";
 
-  const slugFr = getSlugFr(currentSlug, currentLang);
-  const slugEn = getSlugEn(currentSlug, currentLang);
+  const slugFr = getSlugFr(currentSlug, getCurrentLang(currentSlug));
+  const slugEn = getSlugEn(currentSlug, getCurrentLang(currentSlug));
 
   return (
     <>
