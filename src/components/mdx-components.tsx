@@ -75,6 +75,10 @@ const components = {
       {...props}
     />
   ),
+  div: ({ className, ...props }) => (
+    <div className={cn(className)} {...props} />
+  ),
+  Link: ({ className, ...props }) => <a className={cn(className)} {...props} />,
   ul: ({ className, ...props }) => (
     <ul className={cn("my-6 ml-6 list-disc", className)} {...props} />
   ),

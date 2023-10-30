@@ -101,7 +101,7 @@ const PaginationControls: FC<PaginationControlsProps> = ({
             <div>...</div>
           ) : (
             <Link
-              href={`docs/?page=${Number(item)}`}
+              href={`docs?page=${Number(item)}`}
               className={
                 item === Number(currentPageProps)
                   ? "font-bold border-2 p-1"
@@ -118,7 +118,7 @@ const PaginationControls: FC<PaginationControlsProps> = ({
         type="button"
         disabled={!hasNextPage}
         onClick={() => {
-          router.push(`docs/?page=${Number(currentPageProps) + 1}`);
+          router.push(`docs?page=${Number(currentPageProps) + 1}`);
         }}
       >
         next page
