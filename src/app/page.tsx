@@ -1,11 +1,11 @@
 import { Mdx } from "@/components/mdx-components";
 import { DocsPageHeader } from "@/components/page-header";
-import { allDocs } from "contentlayer/generated";
+import { allHomes } from "contentlayer/generated";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
 async function getDocFromParams() {
-  const doc = allDocs.find((doc) => doc.slugAsParams === "home");
+  const doc = allHomes.find((home) => home.slugAsParams === "home");
 
   if (!doc) {
     null;

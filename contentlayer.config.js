@@ -85,9 +85,49 @@ export const EnDoc = defineDocumentType(() => ({
   computedFields,
 }));
 
+export const Home = defineDocumentType(() => ({
+  name: "Home",
+  filePathPattern: `home/**/*.mdx`,
+  contentType: "mdx",
+  fields: {
+    title: {
+      type: "string",
+      required: true,
+    },
+    description: {
+      type: "string",
+    },
+    published: {
+      type: "boolean",
+      default: true,
+    },
+  },
+  computedFields,
+}));
+
+export const EnHome = defineDocumentType(() => ({
+  name: "EnHome",
+  filePathPattern: `en/home/**/*.mdx`,
+  contentType: "mdx",
+  fields: {
+    title: {
+      type: "string",
+      required: true,
+    },
+    description: {
+      type: "string",
+    },
+    published: {
+      type: "boolean",
+      default: true,
+    },
+  },
+  computedFields,
+}));
+
 export default makeSource({
   contentDirPath: "./src/content",
-  documentTypes: [Doc, EnDoc],
+  documentTypes: [Doc, EnDoc, Home, EnHome],
   mdx: {
     remarkPlugins: [remarkGfm, remarkMath],
     rehypePlugins: [
