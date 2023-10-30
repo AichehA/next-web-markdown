@@ -53,12 +53,22 @@ export function LangugeSwitch() {
   return (
     <>
       {slugFr != null ? (
-        <Button variant="ghost" onClick={() => push(slugFr)}>
+        <Button
+          type="button"
+          variant="link"
+          onClick={() => push(slugFr)}
+          className={slugFr === currentSlug ? "font-bold border-2" : ""}
+        >
           <span>Fr</span>
         </Button>
       ) : null}
       {slugEn != null ? (
-        <Button variant="ghost" onClick={() => push(slugEn)}>
+        <Button
+          type="button"
+          variant="link"
+          onClick={() => push(slugEn)}
+          className={slugEn === currentSlug ? "font-bold border-2" : ""}
+        >
           <span>En</span>
         </Button>
       ) : null}
