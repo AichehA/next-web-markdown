@@ -1,5 +1,4 @@
 import * as React from "react";
-import Image from "next/image";
 import { useMDXComponent } from "next-contentlayer/hooks";
 
 import { cn } from "@/lib/utils";
@@ -7,6 +6,7 @@ import { Callout } from "@/components/callout";
 import { MdxCard } from "@/components/mdx-card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TabsArabe, TabsArabeAr, TabsArabeFr } from "@/components/ui/tabsArabe";
+import { DocsPaginationList } from "@/components/paginations/docs-pagination-list";
 
 const components = {
   h1: ({ className, ...props }) => (
@@ -149,7 +149,6 @@ const components = {
       {...props}
     />
   ),
-  Image,
   Callout,
   Tabs: ({ value, ...props }) => <Tabs value={value} {...props}></Tabs>,
   TabsList: ({ ...props }) => <TabsList {...props}></TabsList>,
@@ -163,6 +162,9 @@ const components = {
   TabsArabe,
   TabsArabeFr,
   TabsArabeAr,
+  DocsPaginationList: ({ lang }) => (
+    <DocsPaginationList lang={lang}></DocsPaginationList>
+  ),
 };
 
 interface MdxProps {
