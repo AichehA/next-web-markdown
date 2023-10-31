@@ -24,10 +24,10 @@ export function DocsPaginationList({ lang }) {
     if (searchParamPage) {
       if (Number(searchParamPage) > pageCount) {
         setPage(pageCount);
-        router.push(`docs/?page=${Number(page)}`);
+        router.push(`docs?page=${Number(page)}`);
       } else if (Number(searchParamPage) <= 0) {
         setPage(1);
-        router.push(`docs/?page=${Number(page)}`);
+        router.push(`docs?page=${Number(page)}`);
       } else {
         setPage(Number(searchParamPage));
       }

@@ -82,7 +82,7 @@ const PaginationControls: FC<PaginationControlsProps> = ({
     <div className="flex gap-2 items-center">
       {hasPrevPage ? (
         <Link
-          href={`docs/?page=${currentPageProps - 1}`}
+          href={`docs?page=${currentPageProps - 1}`}
           type="button"
           className={cn(
             "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2"
@@ -115,7 +115,7 @@ const PaginationControls: FC<PaginationControlsProps> = ({
 
       {hasNextPage ? (
         <Link
-          href={`docs/?page=${currentPageProps + 1}`}
+          href={`docs?page=${currentPageProps + 1}`}
           type="button"
           className={cn(
             "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2"
