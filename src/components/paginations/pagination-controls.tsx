@@ -1,28 +1,23 @@
 "use client";
 
 import { FC } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
 
 interface PaginationControlsProps {
   hasNextPage: boolean;
   hasPrevPage: boolean;
-  perPage: string;
-  size: number;
+  pageCount: number;
+  currentPageProps: number;
 }
 
 const PaginationControls: FC<PaginationControlsProps> = ({
   hasNextPage,
   hasPrevPage,
-  perPage,
-  size,
+  pageCount,
+  currentPageProps,
 }) => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-
-  const currentPageProps = searchParams.get("page") ?? "1";
-  const pageCount = Math.ceil(size / Number(perPage));
   const boundaryCount = 1;
   const siblingCount = 1;
 
@@ -41,7 +36,7 @@ const PaginationControls: FC<PaginationControlsProps> = ({
   const siblingsStart = Math.max(
     Math.min(
       // Natural start
-      Number(currentPageProps) - siblingCount,
+      currentPageProps - siblingCount,
       // Lower boundary when page is high
       pageCount - boundaryCount - siblingCount * 2 - 1
     ),
@@ -52,7 +47,7 @@ const PaginationControls: FC<PaginationControlsProps> = ({
   const siblingsEnd = Math.min(
     Math.max(
       // Natural end
-      Number(currentPageProps) + siblingCount,
+      currentPageProps + siblingCount,
       // Upper boundary when page is low
       boundaryCount + siblingCount * 2 + 2
     ),
@@ -85,15 +80,21 @@ const PaginationControls: FC<PaginationControlsProps> = ({
 
   return (
     <div className="flex gap-2 items-center">
-      <Button
-        type="button"
-        disabled={!hasPrevPage}
-        onClick={() => {
-          router.push(`docs/?page=${Number(currentPageProps) - 1}`);
-        }}
-      >
-        prev page
-      </Button>
+      {hasPrevPage ? (
+        <Link
+          href={`docs/?page=${currentPageProps - 1}`}
+          type="button"
+          className={cn(
+            "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2"
+          )}
+        >
+          prev page
+        </Link>
+      ) : (
+        <Button type="button" disabled={true}>
+          prev page
+        </Button>
+      )}
 
       {itemList.map((item, index) => (
         <div key={index}>
@@ -103,9 +104,7 @@ const PaginationControls: FC<PaginationControlsProps> = ({
             <Link
               href={`docs?page=${Number(item)}`}
               className={
-                item === Number(currentPageProps)
-                  ? "font-bold border-2 p-1"
-                  : ""
+                item === currentPageProps ? "font-bold border-2 p-1" : ""
               }
             >
               {item}
@@ -114,15 +113,21 @@ const PaginationControls: FC<PaginationControlsProps> = ({
         </div>
       ))}
 
-      <Button
-        type="button"
-        disabled={!hasNextPage}
-        onClick={() => {
-          router.push(`docs?page=${Number(currentPageProps) + 1}`);
-        }}
-      >
-        next page
-      </Button>
+      {hasNextPage ? (
+        <Link
+          href={`docs/?page=${currentPageProps + 1}`}
+          type="button"
+          className={cn(
+            "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2"
+          )}
+        >
+          prev page
+        </Link>
+      ) : (
+        <Button type="button" disabled={true}>
+          prev page
+        </Button>
+      )}
     </div>
   );
 };

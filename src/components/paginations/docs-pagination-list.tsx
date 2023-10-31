@@ -3,16 +3,36 @@
 import PaginationControls from "@/components/paginations/pagination-controls";
 import { allDocs, allEnDocs } from "contentlayer/generated";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export function DocsPaginationList({ lang }) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [page, setPage] = useState(1);
+
   const docs = lang === "fr" ? allDocs : allEnDocs;
   const totalDocs = docs.filter(
     (doc) => doc._raw.sourceFileName !== "index.mdx"
   );
-  const searchParams = useSearchParams();
-  const page = searchParams.get("page") ?? "1";
+
   const per_page = "1";
+  const pageCount = Math.ceil(totalDocs.length / Number(per_page));
+  const searchParamPage = searchParams.get("page");
+
+  useEffect(() => {
+    if (searchParamPage) {
+      if (Number(searchParamPage) > pageCount) {
+        setPage(pageCount);
+        router.push(`docs/?page=${Number(page)}`);
+      } else if (Number(searchParamPage) <= 0) {
+        setPage(1);
+        router.push(`docs/?page=${Number(page)}`);
+      } else {
+        setPage(Number(searchParamPage));
+      }
+    }
+  }, [searchParamPage, page, setPage, pageCount, router]);
 
   const start = (Number(page) - 1) * Number(per_page);
   const end = start + Number(per_page);
@@ -31,8 +51,8 @@ export function DocsPaginationList({ lang }) {
       <PaginationControls
         hasNextPage={end < totalDocs.length}
         hasPrevPage={start > 0}
-        perPage={per_page}
-        size={totalDocs.length}
+        pageCount={pageCount}
+        currentPageProps={page}
       />
     </div>
   );
