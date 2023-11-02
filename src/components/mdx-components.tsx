@@ -166,8 +166,8 @@ const components = {
   TabsArabe,
   TabsArabeFr,
   TabsArabeAr,
-  DocsPaginationList: ({ lang }) => (
-    <DocsPaginationList lang={lang}></DocsPaginationList>
+  DocsPaginationList: ({ lang, perPage }) => (
+    <DocsPaginationList lang={lang} perPage={perPage}></DocsPaginationList>
   ),
 };
 

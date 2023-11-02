@@ -1,6 +1,7 @@
 "use client";
 
 import { FC } from "react";
+import { Icons } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
@@ -83,29 +84,40 @@ const PaginationControls: FC<PaginationControlsProps> = ({
       {hasPrevPage ? (
         <Link
           href={`docs?page=${currentPageProps - 1}`}
-          type="button"
           className={cn(
-            "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2"
+            "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-2 py-2"
           )}
         >
-          prev page
+          <Icons.chevronLeft />
         </Link>
       ) : (
-        <Button type="button" disabled={true}>
-          prev page
+        <Button type="button" disabled={true} className={cn("px-2")}>
+          <Icons.chevronLeft />
         </Button>
       )}
 
       {itemList.map((item, index) => (
-        <div key={index}>
+        <div
+          key={index}
+          className={cn(
+            item !== "ellipsis"
+              ? "w-7 h-7 border-2 flex justify-center rounded-xl bg-primary text-primary-foreground shadow hover:bg-primary/90"
+              : "w-7 h-7 flex justify-center rounded-xl",
+            item === currentPageProps
+              ? "bg-secondary text-secondary-foreground"
+              : ""
+          )}
+        >
           {item === "ellipsis" ? (
             <div>...</div>
           ) : (
             <Link
               href={`docs?page=${Number(item)}`}
-              className={
-                item === currentPageProps ? "font-bold border-2 p-1" : ""
-              }
+              className={cn(
+                item === currentPageProps
+                  ? "self-center font-bold"
+                  : "self-center"
+              )}
             >
               {item}
             </Link>
@@ -116,16 +128,15 @@ const PaginationControls: FC<PaginationControlsProps> = ({
       {hasNextPage ? (
         <Link
           href={`docs?page=${currentPageProps + 1}`}
-          type="button"
           className={cn(
-            "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2"
+            "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-2 py-2"
           )}
         >
-          prev page
+          <Icons.chevronRight />
         </Link>
       ) : (
-        <Button type="button" disabled={true}>
-          prev page
+        <Button type="button" disabled={true} className={cn("px-2")}>
+          <Icons.chevronRight />
         </Button>
       )}
     </div>

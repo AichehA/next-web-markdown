@@ -6,7 +6,12 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export function DocsPaginationList({ lang }) {
+interface DocsPaginationListProps {
+  lang: string;
+  perPage?: string;
+}
+
+export function DocsPaginationList({ lang, perPage }: DocsPaginationListProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [page, setPage] = useState(1);
@@ -16,8 +21,9 @@ export function DocsPaginationList({ lang }) {
     (doc) => doc._raw.sourceFileName !== "index.mdx"
   );
 
-  const per_page = "1";
-  const pageCount = Math.ceil(totalDocs.length / Number(per_page));
+  perPage = perPage ? perPage : "8";
+
+  const pageCount = Math.ceil(totalDocs.length / Number(perPage));
   const searchParamPage = searchParams.get("page");
 
   useEffect(() => {
@@ -34,8 +40,8 @@ export function DocsPaginationList({ lang }) {
     }
   }, [searchParamPage, page, setPage, pageCount, router]);
 
-  const start = (Number(page) - 1) * Number(per_page);
-  const end = start + Number(per_page);
+  const start = (Number(page) - 1) * Number(perPage);
+  const end = start + Number(perPage);
 
   const entries = totalDocs.slice(start, end);
 
