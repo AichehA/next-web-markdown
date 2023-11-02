@@ -1,3 +1,19 @@
 {
-  "locates": ["fr", "en"]
+  "title": "Mon site",
+  "email": "your-email@example.com",
+  "locates": ["fr", "en"],
+  "socials": [
+    {
+      "link": "https://twitter.com/damienaicheh",
+      "type": "twitter"
+    },
+    {
+      "link": "https://github.com/damienaicheh",
+      "type": "github"
+    },
+    {
+      "link": "https://www.youtube.com/@damienaicheh",
+      "type": "youtube"
+    }
+  ]
 }

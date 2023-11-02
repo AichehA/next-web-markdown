@@ -7,6 +7,7 @@ import { ColorModeSwitch } from "@/components/color-mode-switch";
 import { ThemeProvider } from "@/components/theme-provider";
 import { LangugeSwitch } from "@/components/languge-switch";
 import { useLang } from "@/hooks/use-lang";
+import { Footer } from "@/components/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,6 +25,7 @@ export default function RootLayout({
           <ColorModeSwitch />
           <LangugeSwitch />
           {children}
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

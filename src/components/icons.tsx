@@ -21,6 +21,7 @@ import {
   User,
   X,
   Github,
+  Youtube,
 } from "lucide-react";
 
 export const Icons = {
@@ -46,4 +47,5 @@ export const Icons = {
   gitHub: Github,
   twitter: Twitter,
   check: Check,
+  youtube: Youtube,
 };
