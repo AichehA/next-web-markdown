@@ -27,16 +27,21 @@ export function DocsPaginationList({ lang, perPage }: DocsPaginationListProps) {
   const searchParamPage = searchParams.get("page");
 
   useEffect(() => {
-    if (searchParamPage) {
-      if (Number(searchParamPage) > pageCount) {
-        setPage(pageCount);
-        router.push(`docs?page=${Number(page)}`);
-      } else if (Number(searchParamPage) <= 0) {
-        setPage(1);
-        router.push(`docs?page=${Number(page)}`);
-      } else {
-        setPage(Number(searchParamPage));
-      }
+    let searchParamPageNumber = Number(searchParamPage);
+    if (isNaN(Number(searchParamPage))) {
+      searchParamPageNumber = 1;
+      setPage(1);
+      router.push(`docs?page=${Number(page)}`);
+    }
+
+    if (searchParamPageNumber > pageCount) {
+      setPage(pageCount);
+      router.push(`docs?page=${Number(page)}`);
+    } else if (searchParamPageNumber <= 0) {
+      setPage(1);
+      router.push(`docs?page=${Number(page)}`);
+    } else {
+      setPage(searchParamPageNumber);
     }
   }, [searchParamPage, page, setPage, pageCount, router]);
 

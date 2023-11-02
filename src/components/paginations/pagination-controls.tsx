@@ -104,7 +104,7 @@ const PaginationControls: FC<PaginationControlsProps> = ({
               ? "w-7 h-7 border-2 flex justify-center rounded-xl bg-primary text-primary-foreground shadow hover:bg-primary/90"
               : "w-7 h-7 flex justify-center rounded-xl",
             item === currentPageProps
-              ? "bg-secondary text-secondary-foreground"
+              ? "bg-secondary text-secondary-foreground hover:bg-secondary/90"
               : ""
           )}
         >
@@ -115,8 +115,8 @@ const PaginationControls: FC<PaginationControlsProps> = ({
               href={`docs?page=${Number(item)}`}
               className={cn(
                 item === currentPageProps
-                  ? "self-center font-bold"
-                  : "self-center"
+                  ? "self-center w-full h-full text-center font-bold"
+                  : "self-center w-full h-full text-center"
               )}
             >
               {item}

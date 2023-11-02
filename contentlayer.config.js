@@ -5,8 +5,7 @@ import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
-
-const locates = ["fr", "en"];
+import appConfig from "./app.config.json";
 
 /** @type {import('contentlayer/source-files').ComputedFields} */
 const computedFields = {
@@ -19,7 +18,9 @@ const computedFields = {
     resolve: (doc) => {
       const path = doc._raw.flattenedPath;
       const pathArray = path.split("/");
-      const locale = locates.includes(pathArray.at(0)) ? pathArray.at(0) : "fr";
+      const locale = appConfig.locates.includes(pathArray.at(0))
+        ? pathArray.at(0)
+        : "fr";
       return locale === "fr"
         ? pathArray.slice(1).join("/")
         : pathArray.slice(2).join("/");
@@ -40,7 +41,9 @@ const computedFields = {
     resolve: (doc) => {
       const path = doc._raw.sourceFilePath;
       const pathArray = path.split("/");
-      return locates.includes(pathArray.at(0)) ? pathArray.at(0) : "fr";
+      return appConfig.locates.includes(pathArray.at(0))
+        ? pathArray.at(0)
+        : "fr";
     },
   },
 };
