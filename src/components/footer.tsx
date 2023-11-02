@@ -5,12 +5,12 @@ import { cn } from "@/lib/utils";
 
 function getIcon(type: string) {
   switch (type) {
-    case "github":
-      return <Icons.gitHub />;
-    case "twitter":
-      return <Icons.twitter />;
-    case "youtube":
-      return <Icons.youtube />;
+    case "Github":
+      return <Icons.gitHub className={cn("inline-flex")} />;
+    case "Twitter":
+      return <Icons.twitter className={cn("inline-flex")} />;
+    case "Youtube":
+      return <Icons.youtube className={cn("inline-flex")} />;
 
     default:
       return "";
@@ -19,21 +19,25 @@ function getIcon(type: string) {
 
 export function Footer() {
   return (
-    <footer>
-      <div className={cn("flex")}>
-        {appConfig.socials.map((value, index) => (
-          <Link
-            key={index}
-            href={value.link}
-            aria-label={value.type}
-            target="_blank"
-          >
-            {getIcon(value.type)}
-          </Link>
-        ))}
-      </div>
+    <footer className={cn("border-t")}>
+      <div className={cn("container flex justify-between h-14 items-center")}>
+        <div className={cn("flex")}>
+          {appConfig.socials.map((value, index) => (
+            <Link
+              key={index}
+              href={value.link}
+              aria-label={value.type}
+              target="_blank"
+              className={cn("w-12 text-center")}
+              title={value.type}
+            >
+              {getIcon(value.type)}
+            </Link>
+          ))}
+        </div>
 
-      <p>© 2023 - {appConfig.title}</p>
+        <p>© 2023 - {appConfig.title}</p>
+      </div>
     </footer>
   );
 }
