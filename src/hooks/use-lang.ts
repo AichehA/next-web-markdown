@@ -45,14 +45,10 @@ export function useLang() {
   const getCurrentSlug = usePathname();
   const getLangs = appConfig.locates;
   const getCurrentLang = getCurrentLangBySlug(getCurrentSlug);
-  const getCurrentSlugFr = getSlugFr(getCurrentSlug, getCurrentLang);
-  const getCurrentSlugEn = getSlugEn(getCurrentSlug, getCurrentLang);
 
   return {
     getLangs,
     getCurrentLang,
-    getCurrentSlugFr,
-    getCurrentSlugEn,
     getCurrentSlug,
   };
 }
