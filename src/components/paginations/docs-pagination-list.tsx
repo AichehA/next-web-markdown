@@ -1,24 +1,25 @@
 "use client";
 
 import PaginationControls from "@/components/paginations/pagination-controls";
+import { useLang } from "@/hooks/use-lang";
 import { allDocs } from "contentlayer/generated";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface DocsPaginationListProps {
-  lang: string;
   perPage?: string;
 }
 
-export function DocsPaginationList({ lang, perPage }: DocsPaginationListProps) {
+export function DocsPaginationList({ perPage }: DocsPaginationListProps) {
+  const { getCurrentLang } = useLang();
   const router = useRouter();
   const searchParams = useSearchParams();
   const [page, setPage] = useState(1);
 
-  const docs = lang === "fr" ? allDocs : allDocs;
-  const totalDocs = docs.filter(
-    (doc) => doc._raw.sourceFileName !== "index.mdx"
+  const totalDocs = allDocs.filter(
+    (doc) =>
+      doc.locale === getCurrentLang && doc._raw.sourceFileName !== "index.mdx"
   );
 
   perPage = perPage ? perPage : "8";
