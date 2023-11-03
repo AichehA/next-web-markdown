@@ -1,7 +1,7 @@
 "use client";
 
 import PaginationControls from "@/components/paginations/pagination-controls";
-import { allDocs, allEnDocs } from "contentlayer/generated";
+import { allDocs } from "contentlayer/generated";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -16,7 +16,7 @@ export function DocsPaginationList({ lang, perPage }: DocsPaginationListProps) {
   const searchParams = useSearchParams();
   const [page, setPage] = useState(1);
 
-  const docs = lang === "fr" ? allDocs : allEnDocs;
+  const docs = lang === "fr" ? allDocs : allDocs;
   const totalDocs = docs.filter(
     (doc) => doc._raw.sourceFileName !== "index.mdx"
   );

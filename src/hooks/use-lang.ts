@@ -1,4 +1,4 @@
-import { allDocs, allEnDocs } from "contentlayer/generated";
+import { allDocs } from "contentlayer/generated";
 import { usePathname } from "next/navigation";
 import appConfig from "app-config";
 
@@ -32,7 +32,7 @@ function getSlugEn(slug: string, currentLang: string) {
     return "/en";
   }
 
-  const doc = allEnDocs.find((doc) => doc.slug === currentSlug);
+  const doc = allDocs.find((doc) => doc.slug === currentSlug);
 
   if (!doc) {
     return null;

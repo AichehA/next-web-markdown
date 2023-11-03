@@ -18,12 +18,7 @@ const computedFields = {
     resolve: (doc) => {
       const path = doc._raw.flattenedPath;
       const pathArray = path.split("/");
-      const locale = appConfig.locates.includes(pathArray.at(0))
-        ? pathArray.at(0)
-        : "fr";
-      return locale === "fr"
-        ? pathArray.slice(1).join("/")
-        : pathArray.slice(2).join("/");
+      return pathArray.slice(2).join("/");
     },
   },
   readTime: {
@@ -48,29 +43,9 @@ const computedFields = {
   },
 };
 
-export const Doc = defineDocumentType(() => ({
-  name: "Doc",
-  filePathPattern: `docs/**/*.mdx`,
-  contentType: "mdx",
-  fields: {
-    title: {
-      type: "string",
-      required: true,
-    },
-    description: {
-      type: "string",
-    },
-    published: {
-      type: "boolean",
-      default: true,
-    },
-  },
-  computedFields,
-}));
-
-export const EnDoc = defineDocumentType(() => ({
-  name: "EnDoc",
-  filePathPattern: `en/docs/**/*.mdx`,
+export const Docs = defineDocumentType(() => ({
+  name: "Docs",
+  filePathPattern: `**/docs/**/*.mdx`,
   contentType: "mdx",
   fields: {
     title: {
@@ -90,27 +65,7 @@ export const EnDoc = defineDocumentType(() => ({
 
 export const Home = defineDocumentType(() => ({
   name: "Home",
-  filePathPattern: `home/**/*.mdx`,
-  contentType: "mdx",
-  fields: {
-    title: {
-      type: "string",
-      required: true,
-    },
-    description: {
-      type: "string",
-    },
-    published: {
-      type: "boolean",
-      default: true,
-    },
-  },
-  computedFields,
-}));
-
-export const EnHome = defineDocumentType(() => ({
-  name: "EnHome",
-  filePathPattern: `en/home/**/*.mdx`,
+  filePathPattern: `**/home/**/*.mdx`,
   contentType: "mdx",
   fields: {
     title: {
@@ -130,7 +85,7 @@ export const EnHome = defineDocumentType(() => ({
 
 export default makeSource({
   contentDirPath: "./src/content",
-  documentTypes: [Doc, EnDoc, Home, EnHome],
+  documentTypes: [Docs, Home],
   mdx: {
     remarkPlugins: [remarkGfm, remarkMath],
     rehypePlugins: [

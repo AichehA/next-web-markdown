@@ -1,27 +1,32 @@
 import { notFound } from "next/navigation";
-import { allDocs } from "contentlayer/generated";
 
 import { Metadata } from "next";
 import { Mdx } from "@/components/mdx-components";
 import { DocsPageHeader } from "@/components/page-header";
 import { DashboardTableOfContents } from "@/components/toc";
 import { getTableOfContents } from "@/lib/toc";
+import { allDocs } from "contentlayer/generated";
 
 interface DocPageProps {
   params: {
+    lang: string;
     slug: string[];
   };
 }
 
 export async function generateStaticParams() {
   return allDocs.map((doc) => ({
+    lang: doc.locale,
     slug: doc.slugAsParams.split("/"),
   }));
 }
 
-async function getDocFromParams(slug: string[]) {
+async function getDocFromParams(lang: string, slug: string[]) {
   const slugPath = slug?.join("/") || "";
-  const doc = allDocs.find((doc) => doc.slugAsParams === slugPath);
+
+  const doc = allDocs.find(
+    (doc) => doc.slugAsParams === slugPath && doc.locale === lang
+  );
 
   if (!doc) {
     null;
@@ -33,7 +38,7 @@ async function getDocFromParams(slug: string[]) {
 export async function generateMetadata({
   params,
 }: DocPageProps): Promise<Metadata> {
-  const doc = await getDocFromParams(params.slug);
+  const doc = await getDocFromParams(params.lang, params.slug);
 
   if (!doc) {
     return {};
@@ -72,7 +77,7 @@ export async function generateMetadata({
 }
 
 export default async function DocPage({ params }: DocPageProps) {
-  const doc = await getDocFromParams(params.slug);
+  const doc = await getDocFromParams(params.lang, params.slug);
 
   if (!doc) {
     notFound();

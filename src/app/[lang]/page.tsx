@@ -1,11 +1,24 @@
 import { Mdx } from "@/components/mdx-components";
 import { DocsPageHeader } from "@/components/page-header";
-import { allEnHomes } from "contentlayer/generated";
+import { allHomes } from "contentlayer/generated";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
-async function getDocFromParams() {
-  const doc = allEnHomes.find((home) => home.slugAsParams === "home");
+interface HomePageProps {
+  params: {
+    lang: string;
+  };
+}
+
+export async function generateStaticParams() {
+  return allHomes.map((doc) => ({
+    lang: doc.locale,
+  }));
+}
+
+async function getDocFromParams(lang: string) {
+  const doc = allHomes.find((home) => home.locale === lang);
+  console.log(lang);
 
   if (!doc) {
     null;
@@ -14,8 +27,8 @@ async function getDocFromParams() {
   return doc;
 }
 
-export default async function Home() {
-  const doc = await getDocFromParams();
+export default async function Home({ params }: HomePageProps) {
+  const doc = await getDocFromParams(params.lang);
 
   if (!doc) {
     notFound();
