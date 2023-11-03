@@ -4,6 +4,7 @@ import { LangugeSwitch } from "@/components/languge-switch";
 import { ColorModeSwitch } from "@/components/color-mode-switch";
 import Link from "next/link";
 import { useLang } from "@/hooks/use-lang";
+import { Search } from "@/components/search";
 
 interface routerModel {
   title: string;
@@ -76,6 +77,7 @@ export function Header() {
               ))}
           </nav>
           <nav className={cn("flex items-center")}>
+            <Search />
             <ColorModeSwitch />
           </nav>
         </div>
