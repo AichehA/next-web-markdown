@@ -7,6 +7,7 @@ import { MdxCard } from "@/components/mdx-card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TabsArabe, TabsArabeAr, TabsArabeFr } from "@/components/ui/tabsArabe";
 import { DocsPaginationList } from "@/components/paginations/docs-pagination-list";
+import { PreCode } from "@/components/ui/pre-code";
 
 const components = {
   h1: ({ className, ...props }) => (
@@ -135,15 +136,7 @@ const components = {
       {...props}
     />
   ),
-  pre: ({ className, ...props }) => (
-    <pre
-      className={cn(
-        "mb-4 mt-6 overflow-x-auto rounded-lg border bg-black py-4",
-        className
-      )}
-      {...props}
-    />
-  ),
+  pre: PreCode,
   code: ({ className, ...props }) => (
     <code
       className={cn(
@@ -166,8 +159,8 @@ const components = {
   TabsArabe,
   TabsArabeFr,
   TabsArabeAr,
-  DocsPaginationList: ({ lang, perPage }) => (
-    <DocsPaginationList lang={lang} perPage={perPage}></DocsPaginationList>
+  DocsPaginationList: ({ perPage }) => (
+    <DocsPaginationList perPage={perPage}></DocsPaginationList>
   ),
 };
 

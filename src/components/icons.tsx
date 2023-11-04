@@ -23,9 +23,13 @@ import {
   Github,
   Youtube,
   LucideProps,
+  Copy,
+  CopyCheck,
 } from "lucide-react";
 
 export const Icons = {
+  copy: Copy,
+  copyCheck: CopyCheck,
   logo: Command,
   close: X,
   spinner: Loader2,
