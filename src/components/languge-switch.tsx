@@ -7,7 +7,7 @@ import { allDocs, allHomes } from "contentlayer/generated";
 import appConfig from "app-config";
 
 export function LangugeSwitch() {
-  const { getCurrentSlug } = useLang();
+  const { getCurrentSlug, getCurrentLang } = useLang();
   const { push } = useRouter();
 
   const potentialPath = appConfig.locates.map((lang) => {
@@ -31,7 +31,7 @@ export function LangugeSwitch() {
           type="button"
           variant="link"
           onClick={() => push(doc.slug)}
-          className={doc.locale === getCurrentSlug ? "font-bold border-2" : ""}
+          className={doc.locale === getCurrentLang ? "font-bold border-2" : ""}
         >
           <span>{doc.locale.toUpperCase()}</span>
         </Button>

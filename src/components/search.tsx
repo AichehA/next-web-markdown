@@ -14,10 +14,13 @@ import {
 import { Button } from "@/components/ui/button";
 import { allDocs } from "contentlayer/generated";
 import { useRouter } from "next/navigation";
+import { useLang } from "@/hooks/use-lang";
 
 export function Search() {
+  const { getCurrentLang } = useLang();
   const router = useRouter();
   const [open, setOpen] = React.useState(false);
+  const allData = allDocs.filter((data) => data.locale === getCurrentLang);
 
   React.useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -49,14 +52,14 @@ export function Search() {
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandGroup heading="Documentation">
-            {allDocs.map((item) => {
+            {allData.map((item) => {
               return (
                 <CommandItem
                   key={item._id}
                   value={item.title}
                   className="flex-col items-start"
                   onSelect={(value) => {
-                    const slug = allDocs.find(
+                    const slug = allData.find(
                       (doc) => doc.title.toLowerCase() === value
                     )?.slug;
 
