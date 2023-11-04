@@ -8,7 +8,7 @@ function getIcon(type: string) {
     case "Github":
       return <Icons.gitHub className={cn("inline-flex")} />;
     case "Twitter":
-      return <Icons.twitter className={cn("inline-flex")} />;
+      return <Icons.twitterX className={cn("inline-flex")} />;
     case "Youtube":
       return <Icons.youtube className={cn("inline-flex")} />;
 
@@ -21,7 +21,7 @@ export function Footer() {
   return (
     <footer className={cn("border-t")}>
       <div className={cn("container flex justify-between h-14 items-center")}>
-        <div className={cn("flex")}>
+        <div className={cn("flex items-center")}>
           {appConfig.socials.map((value, index) => (
             <Link
               key={index}

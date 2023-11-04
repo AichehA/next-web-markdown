@@ -3,22 +3,24 @@
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
 import { useLang } from "@/hooks/use-lang";
-import { allDocs } from "contentlayer/generated";
+import { allDocs, allHomes } from "contentlayer/generated";
 import appConfig from "app-config";
 
 export function LangugeSwitch() {
   const { getCurrentSlug } = useLang();
   const { push } = useRouter();
 
-  const potentialDocs = appConfig.locates.map((lang) => {
-    let v = getCurrentSlug.split("/").splice(2);
-    return "/" + lang + "/" + v.join("/");
+  const potentialPath = appConfig.locates.map((lang) => {
+    const slugArray = getCurrentSlug.split("/").splice(2);
+    return slugArray.length
+      ? "/" + lang + "/" + slugArray.join("/")
+      : "/" + lang;
   });
 
-  console.log("potentialDocs", potentialDocs);
+  const allData = [...allDocs, ...allHomes];
 
-  const getLangs = allDocs.filter((doc) => {
-    return potentialDocs.includes(doc.slug);
+  const getLangs = allData.filter((doc) => {
+    return potentialPath.includes(doc.slug);
   });
 
   return (

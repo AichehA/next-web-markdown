@@ -18,7 +18,6 @@ export async function generateStaticParams() {
 
 async function getDocFromParams(lang: string) {
   const doc = allHomes.find((home) => home.locale === lang);
-  console.log(lang);
 
   if (!doc) {
     null;

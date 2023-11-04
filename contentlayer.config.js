@@ -11,7 +11,11 @@ import appConfig from "./app.config.json";
 const computedFields = {
   slug: {
     type: "string",
-    resolve: (doc) => `/${doc._raw.flattenedPath}`,
+    resolve: (doc) => {
+      return doc._raw.flattenedPath.includes("home")
+        ? `/${doc._raw.sourceFileDir}`
+        : `/${doc._raw.flattenedPath}`;
+    },
   },
   slugAsParams: {
     type: "string",
@@ -63,9 +67,9 @@ export const Docs = defineDocumentType(() => ({
   computedFields,
 }));
 
-export const Home = defineDocumentType(() => ({
-  name: "Home",
-  filePathPattern: `**/home/**/*.mdx`,
+export const Homes = defineDocumentType(() => ({
+  name: "Homes",
+  filePathPattern: `**/home.mdx`,
   contentType: "mdx",
   fields: {
     title: {
@@ -85,7 +89,7 @@ export const Home = defineDocumentType(() => ({
 
 export default makeSource({
   contentDirPath: "./src/content",
-  documentTypes: [Docs, Home],
+  documentTypes: [Docs, Homes],
   mdx: {
     remarkPlugins: [remarkGfm, remarkMath],
     rehypePlugins: [
