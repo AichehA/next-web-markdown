@@ -15,7 +15,7 @@ interface routerModel {
 const router: routerModel[] = [
   {
     title: "Documentation",
-    link: "/docs",
+    link: "/fr/docs",
     lang: "fr",
   },
   {
@@ -25,7 +25,7 @@ const router: routerModel[] = [
   },
   {
     title: "Exemple toto",
-    link: "/docs/toto",
+    link: "/fr/docs/toto",
     lang: "fr",
   },
   {

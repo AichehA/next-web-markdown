@@ -1,6 +1,9 @@
 "use client";
 
 import * as React from "react";
+import { allDocs } from "contentlayer/generated";
+import { useRouter } from "next/navigation";
+import { useLang } from "@/hooks/use-lang";
 import {
   CommandDialog,
   CommandEmpty,
@@ -9,12 +12,9 @@ import {
   CommandItem,
   CommandList,
   CommandSeparator,
-  CommandShortcut,
 } from "@/components/ui/command";
 import { Button } from "@/components/ui/button";
-import { allDocs } from "contentlayer/generated";
-import { useRouter } from "next/navigation";
-import { useLang } from "@/hooks/use-lang";
+import { Translate } from "@/components/ui/translate";
 
 export function Search() {
   const { getCurrentLang } = useLang();
@@ -24,7 +24,7 @@ export function Search() {
 
   React.useEffect(() => {
     const down = (e: KeyboardEvent) => {
-      if (e.key === "r" && (e.metaKey || e.ctrlKey)) {
+      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
         setOpen((open) => !open);
       }
@@ -42,15 +42,17 @@ export function Search() {
         className="border"
         onClick={() => setOpen((open) => !open)}
       >
-        <span className="inline-flex mr-2">Search...</span>
+        <span className="inline-flex mr-2">
+          {Translate("search.search_bar_name")}
+        </span>
         <kbd className="pointer-events-none right-1.5 top-1.5 hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
-          <span>⌘</span>R
+          <span>⌘</span>K
         </kbd>
       </Button>
       <CommandDialog open={open} onOpenChange={setOpen}>
-        <CommandInput placeholder="Type a command or search..." />
+        <CommandInput placeholder={Translate("search.placeholder")} />
         <CommandList>
-          <CommandEmpty>No results found.</CommandEmpty>
+          <CommandEmpty>{Translate("search.search_not_found")}</CommandEmpty>
           <CommandGroup heading="Documentation">
             {allData.map((item) => {
               return (
