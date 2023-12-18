@@ -18,7 +18,7 @@
     "paths": {
       "@/*": ["./src/*"],
       "contentlayer/generated": ["./.contentlayer/generated"],
-      "app-config": ["./app.config.json"]
+      "app-config": ["./app.config.ts"]
     },
     "plugins": [
       {
@@ -32,8 +32,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    ".contentlayer/generated",
-    "app.config.json"
+    ".contentlayer/generated"
   ],
   "exclude": ["node_modules"]
 }

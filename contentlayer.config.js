@@ -5,7 +5,7 @@ import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
-import appConfig from "./app.config.json";
+import appConfig from "./app.config";
 
 /** @type {import('contentlayer/source-files').ComputedFields} */
 const computedFields = {

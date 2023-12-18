@@ -3,7 +3,7 @@
 import * as React from "react";
 import { Icons } from "../icons";
 import { useLang } from "@/hooks/use-lang";
-import { langs } from "langs";
+import appConfig from "app-config";
 
 function findValueByKey(object, key) {
   let value;
@@ -27,7 +27,7 @@ export const Translate = (keyTranslate: string) => {
   const [data, setData] = React.useState<any[]>([]);
 
   React.useEffect(() => {
-    setData(langs[getCurrentLang]);
+    setData(appConfig.langs[getCurrentLang]);
   }, [getCurrentLang, data]);
 
   const t = (key: string) => {

@@ -12,9 +12,13 @@ Le site est réalisé en [Next.js](https://nextjs.org/)
 ### EN
 
 - http://localhost:3000/next-web-markdown/en/
-- http://localhost:3000/next-web-markdown/en/docs/hello-world
+- http://localhost:3000/next-web-markdown/en/docs
 
 ## Lancement du projet en local
+
+```bash
+pnpm install
+```
 
 ```bash
 pnpm dev
@@ -22,7 +26,10 @@ pnpm dev
 
 ## Todos
 
-- Lien des pages de la navigation en multi langue
-- Recherche plus complète
-- Toggle sur le button dark mode
-- Fichier json par langue pour les textes fixe par page / composant
+- [X] Renommage de la config "app.config.json" en "app.config.ts".
+- [ ] Fichier json par langue pour les textes fixe par page / composant.
+  - [X] Changement de la configuration pour la placer dans le fichier global "app.config.ts".
+  - [ ] Mise en place de la traduction sur toute l'application.
+- [ ] Lien des pages de la navigation en multi langue
+- [ ] Recherche plus complète
+- [ ] Toggle sur le button dark mode
