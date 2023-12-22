@@ -84,6 +84,7 @@ const PaginationControls: FC<PaginationControlsProps> = ({
       {hasPrevPage ? (
         <Link
           href={`docs?page=${currentPageProps - 1}`}
+          title={`Page ${currentPageProps - 1}`}
           className={cn(
             "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-2 py-2"
           )}
@@ -91,7 +92,12 @@ const PaginationControls: FC<PaginationControlsProps> = ({
           <Icons.chevronLeft />
         </Link>
       ) : (
-        <Button type="button" disabled={true} className={cn("px-2")}>
+        <Button
+          type="button"
+          title={`disabled`}
+          disabled={true}
+          className={cn("px-2")}
+        >
           <Icons.chevronLeft />
         </Button>
       )}
@@ -113,6 +119,7 @@ const PaginationControls: FC<PaginationControlsProps> = ({
           ) : (
             <Link
               href={`docs?page=${Number(item)}`}
+              title={`Page ${item}`}
               className={cn(
                 item === currentPageProps
                   ? "self-center w-full h-full text-center font-bold"
@@ -128,6 +135,7 @@ const PaginationControls: FC<PaginationControlsProps> = ({
       {hasNextPage ? (
         <Link
           href={`docs?page=${currentPageProps + 1}`}
+          title={`Page ${currentPageProps + 1}`}
           className={cn(
             "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-2 py-2"
           )}
@@ -135,7 +143,12 @@ const PaginationControls: FC<PaginationControlsProps> = ({
           <Icons.chevronRight />
         </Link>
       ) : (
-        <Button type="button" disabled={true} className={cn("px-2")}>
+        <Button
+          type="button"
+          title={`disabled`}
+          disabled={true}
+          className={cn("px-2")}
+        >
           <Icons.chevronRight />
         </Button>
       )}

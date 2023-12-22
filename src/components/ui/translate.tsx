@@ -24,11 +24,8 @@ function findValueByKey(object, key) {
 
 export const Translate = (keyTranslate: string) => {
   const { getCurrentLang } = useLang();
-  const [data, setData] = React.useState<any[]>([]);
 
-  React.useEffect(() => {
-    setData(appConfig.langs[getCurrentLang]);
-  }, [getCurrentLang, data]);
+  const data = appConfig.langs[getCurrentLang];
 
   const t = (key: string) => {
     const keys = key.split(".");

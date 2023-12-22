@@ -5,6 +5,7 @@ import * as React from "react";
 import { TableOfContents, Item } from "@/lib/toc";
 import { cn } from "@/lib/utils";
 import { useMounted } from "@/hooks/use-mounted";
+import { Translate } from "@/components/ui/translate";
 
 interface TocProps {
   toc: TableOfContents;
@@ -29,9 +30,11 @@ export function DashboardTableOfContents({ toc }: TocProps) {
     return null;
   }
 
+  const tocTitle = <>{Translate("toc.title")}</>;
+
   return mounted ? (
     <div className="space-y-2">
-      <p className="font-medium">On This Page</p>
+      <p className="font-medium">{tocTitle}</p>
       <Tree tree={toc} activeItem={activeHeading} />
     </div>
   ) : null;
