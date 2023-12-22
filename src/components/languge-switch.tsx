@@ -19,9 +19,19 @@ export function LangugeSwitch() {
 
   const allData = [...allDocs, ...allHomes];
 
-  const getLangs = allData.filter((doc) => {
-    return potentialPath.includes(doc.slug);
-  });
+  /**
+   * Permet de filtrer si l'article est disponible dans plusieurs langues.
+   * Le résultat des boutons est retourné dans ordre du tableau de configuration "appConfig.locates"
+   */
+  const getLangs = allData
+    .filter((doc) => {
+      return potentialPath.includes(doc.slug);
+    })
+    .sort(
+      (docA, docB) =>
+        appConfig.locates.indexOf(docA.locale) -
+        appConfig.locates.indexOf(docB.locale)
+    );
 
   return (
     <>

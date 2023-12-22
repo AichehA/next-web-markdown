@@ -12,28 +12,7 @@ interface routerModel {
   lang: string;
 }
 
-const router: routerModel[] = [
-  {
-    title: "Documentation",
-    link: "/fr/docs",
-    lang: "fr",
-  },
-  {
-    title: "Documentation",
-    link: "/en/docs",
-    lang: "en",
-  },
-  {
-    title: "Exemple toto",
-    link: "/fr/docs/toto",
-    lang: "fr",
-  },
-  {
-    title: "Example toto",
-    link: "/en/docs/toto",
-    lang: "en",
-  },
-];
+const router: routerModel[] = appConfig.menuNavigation;
 
 export function Header() {
   const { getCurrentSlug, getCurrentLang } = useLang();

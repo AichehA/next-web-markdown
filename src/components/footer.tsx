@@ -36,7 +36,7 @@ export function Footer() {
           ))}
         </div>
 
-        <p>© 2023 - {appConfig.title}</p>
+        <p>{appConfig.copyright}</p>
       </div>
     </footer>
   );
