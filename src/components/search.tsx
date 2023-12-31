@@ -52,21 +52,17 @@ export function Search() {
       </Button>
       <CommandDialog open={open} onOpenChange={setOpen}>
         <Command
-          filter={(value, search) => {
+          filter={(itemId, search) => {
             const idDocArray = allData
               .filter((docs) => {
-                const content =
-                  docs.title.toLowerCase() +
-                  " " +
-                  docs.description?.toLowerCase() +
-                  " " +
-                  docs.body.raw.toLowerCase();
-                return JSON.stringify(content).includes(search);
+                return JSON.stringify(
+                  `${docs.title} ${docs.description} ${docs.body.raw}`.toLowerCase()
+                ).includes(search);
               })
               .map((doc) => {
                 return doc._id;
               });
-            if (idDocArray.includes(value)) return 1;
+            if (idDocArray.includes(itemId)) return 1;
             return 0;
           }}
         >
