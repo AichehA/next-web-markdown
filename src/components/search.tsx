@@ -5,6 +5,7 @@ import { allDocs } from "contentlayer/generated";
 import { useRouter } from "next/navigation";
 import { useLang } from "@/hooks/use-lang";
 import {
+  Command,
   CommandDialog,
   CommandEmpty,
   CommandGroup,
@@ -50,35 +51,55 @@ export function Search() {
         </kbd>
       </Button>
       <CommandDialog open={open} onOpenChange={setOpen}>
-        <CommandInput placeholder={Translate("search.placeholder")} />
-        <CommandList>
-          <CommandEmpty>{Translate("search.search_not_found")}</CommandEmpty>
-          <CommandGroup heading="Documentation">
-            {allData.map((item) => {
-              return (
-                <CommandItem
-                  key={item._id}
-                  value={item.title}
-                  className="flex-col items-start"
-                  onSelect={(value) => {
-                    const slug = allData.find(
-                      (doc) => doc.title.toLowerCase() === value
-                    )?.slug;
+        <Command
+          filter={(value, search) => {
+            const idDocArray = allData
+              .filter((docs) => {
+                const content =
+                  docs.title.toLowerCase() +
+                  " " +
+                  docs.description?.toLowerCase() +
+                  " " +
+                  docs.body.raw.toLowerCase();
+                return JSON.stringify(content).includes(search);
+              })
+              .map((doc) => {
+                return doc._id;
+              });
+            if (idDocArray.includes(value)) return 1;
+            return 0;
+          }}
+        >
+          <CommandInput placeholder={Translate("search.placeholder")} />
+          <CommandList>
+            <CommandEmpty>{Translate("search.search_not_found")}</CommandEmpty>
+            <CommandGroup heading="Documentation">
+              {allData.map((item) => {
+                return (
+                  <CommandItem
+                    key={item._id}
+                    value={item._id}
+                    className="flex-col items-start"
+                    onSelect={(value) => {
+                      const slug = allData.find(
+                        (doc) => doc._id === value
+                      )?.slug;
 
-                    if (slug) {
-                      router.push(slug);
-                      setOpen(false);
-                    }
-                  }}
-                >
-                  <span>{item.title}</span>
-                  <span className="text-xs">{item.description}</span>
-                </CommandItem>
-              );
-            })}
-          </CommandGroup>
-          <CommandSeparator />
-        </CommandList>
+                      if (slug) {
+                        router.push(slug);
+                        setOpen(false);
+                      }
+                    }}
+                  >
+                    <span>{item.title}</span>
+                    <span className="text-xs">{item.description}</span>
+                  </CommandItem>
+                );
+              })}
+            </CommandGroup>
+            <CommandSeparator />
+          </CommandList>
+        </Command>
       </CommandDialog>
     </>
   );
