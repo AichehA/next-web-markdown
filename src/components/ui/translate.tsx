@@ -25,7 +25,7 @@ function findValueByKey(object, key) {
 export const Translate = (keyTranslate: string) => {
   const { getCurrentLang } = useLang();
 
-  const data = appConfig.langs[getCurrentLang];
+  const data = appConfig.langTranslates[getCurrentLang];
 
   const t = (key: string) => {
     const keys = key.split(".");

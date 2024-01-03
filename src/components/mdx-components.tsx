@@ -8,6 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TabsArabe, TabsArabeAr, TabsArabeFr } from "@/components/ui/tabsArabe";
 import { DocsPaginationList } from "@/components/paginations/docs-pagination-list";
 import { PreCode } from "@/components/ui/pre-code";
+import { Posts } from "@/components/ui/posts";
 
 const components = {
   h1: ({ className, ...props }) => (
@@ -161,6 +162,21 @@ const components = {
   TabsArabeAr,
   DocsPaginationList: ({ perPage }) => (
     <DocsPaginationList perPage={perPage}></DocsPaginationList>
+  ),
+  Posts: ({
+    featuredPostTitle,
+    featuredPostBtn,
+    allPostsTitle,
+    allPostsBtn,
+    ...props
+  }) => (
+    <Posts
+      featuredPostTitle={featuredPostTitle}
+      featuredPostBtn={featuredPostBtn}
+      allPostsTitle={allPostsTitle}
+      allPostsBtn={allPostsBtn}
+      {...props}
+    ></Posts>
   ),
 };
 

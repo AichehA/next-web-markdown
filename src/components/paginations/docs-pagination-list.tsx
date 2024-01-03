@@ -19,7 +19,7 @@ export function DocsPaginationList({ perPage }: DocsPaginationListProps) {
 
   const totalDocs = allDocs.filter(
     (doc) =>
-      doc.locale === getCurrentLang && doc._raw.sourceFileName !== "index.mdx"
+      doc.lang === getCurrentLang && doc._raw.sourceFileName !== "index.mdx"
   );
 
   perPage = perPage ? perPage : "8";

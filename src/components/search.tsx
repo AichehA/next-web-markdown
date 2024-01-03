@@ -21,7 +21,7 @@ export function Search() {
   const { getCurrentLang } = useLang();
   const router = useRouter();
   const [open, setOpen] = React.useState(false);
-  const allData = allDocs.filter((data) => data.locale === getCurrentLang);
+  const allData = allDocs.filter((data) => data.lang === getCurrentLang);
 
   React.useEffect(() => {
     const down = (e: KeyboardEvent) => {

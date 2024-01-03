@@ -10,7 +10,7 @@ export function LangugeSwitch() {
   const { getCurrentSlug, getCurrentLang } = useLang();
   const { push } = useRouter();
 
-  const potentialPath = appConfig.locates.map((lang) => {
+  const potentialPath = appConfig.langs.map((lang) => {
     const slugArray = getCurrentSlug.split("/").splice(2);
     return slugArray.length
       ? "/" + lang + "/" + slugArray.join("/")
@@ -21,7 +21,7 @@ export function LangugeSwitch() {
 
   /**
    * Permet de filtrer si l'article est disponible dans plusieurs langues.
-   * Le résultat des boutons est retourné dans ordre du tableau de configuration "appConfig.locates"
+   * Le résultat des boutons est retourné dans ordre du tableau de configuration "appConfig.langs"
    */
   const getLangs = allData
     .filter((doc) => {
@@ -29,8 +29,7 @@ export function LangugeSwitch() {
     })
     .sort(
       (docA, docB) =>
-        appConfig.locates.indexOf(docA.locale) -
-        appConfig.locates.indexOf(docB.locale)
+        appConfig.langs.indexOf(docA.lang) - appConfig.langs.indexOf(docB.lang)
     );
 
   return (
@@ -41,9 +40,9 @@ export function LangugeSwitch() {
           type="button"
           variant="link"
           onClick={() => push(doc.slug)}
-          className={doc.locale === getCurrentLang ? "font-bold border-2" : ""}
+          className={doc.lang === getCurrentLang ? "font-bold border-2" : ""}
         >
-          <span>{doc.locale.toUpperCase()}</span>
+          <span>{doc.lang.toUpperCase()}</span>
         </Button>
       ))}
     </>

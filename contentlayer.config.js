@@ -35,14 +35,12 @@ const computedFields = {
       return readTime;
     },
   },
-  locale: {
+  lang: {
     type: "string",
     resolve: (doc) => {
       const path = doc._raw.sourceFilePath;
       const pathArray = path.split("/");
-      return appConfig.locates.includes(pathArray.at(0))
-        ? pathArray.at(0)
-        : "fr";
+      return appConfig.langs.includes(pathArray.at(0)) ? pathArray.at(0) : "fr";
     },
   },
 };
@@ -57,6 +55,13 @@ export const Docs = defineDocumentType(() => ({
       required: true,
     },
     description: {
+      type: "string",
+    },
+    date: {
+      type: "date",
+      required: true,
+    },
+    cover: {
       type: "string",
     },
     published: {

@@ -16,7 +16,7 @@ interface DocPageProps {
 
 export async function generateStaticParams() {
   return allDocs.map((doc) => ({
-    lang: doc.locale,
+    lang: doc.lang,
     slug: doc.slugAsParams.split("/"),
   }));
 }
@@ -25,7 +25,7 @@ async function getDocFromParams(lang: string, slug: string[]) {
   const slugPath = slug?.join("/") || "";
 
   const doc = allDocs.find(
-    (doc) => doc.slugAsParams === slugPath && doc.locale === lang
+    (doc) => doc.slugAsParams === slugPath && doc.lang === lang
   );
 
   if (!doc) {

@@ -5,8 +5,9 @@ const appConfig = {
   title: "Mon site",
   copyright: "© 2023 - Mon site",
   email: "your-email@example.com",
-  locates: ["fr", "en"],
-  langs: {
+  locates: { fr: "fr-FR", en: "en-US" },
+  langs: ["fr", "en"],
+  langTranslates: {
     fr: fr,
     en: en,
   },
