@@ -24,6 +24,8 @@ import {
   LucideProps,
   Copy,
   CopyCheck,
+  CalendarClock,
+  Hourglass,
 } from "lucide-react";
 
 export const Icons = {
@@ -56,6 +58,8 @@ export const Icons = {
   post: FileText,
   page: File,
   media: Image,
+  calendarClock: CalendarClock,
+  hourglass: Hourglass,
   settings: Settings,
   ellipsis: MoreVertical,
   add: Plus,
