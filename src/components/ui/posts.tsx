@@ -81,7 +81,7 @@ function FeaturePostsDocs(
   currentLang: string
 ) {
   return (
-    <div className="border flex justify-around flex-col w-full p-8 border-solid mb-2 bg-card gap-5 text-card-foreground md:flex-row">
+    <div className="border flex justify-around flex-col w-full p-4 md:p-6 border-solid mb-2 bg-card gap-5 text-card-foreground md:flex-row">
       {doc.cover ? (
         <div className="flex flex-col items-stretch w-[45%] max-md:w-full max-md:ml-0">
           <Image
@@ -121,13 +121,13 @@ function FeaturePostsDocs(
 function PostsDocs(doc: Docs, currentLang: string) {
   return (
     <Link
-      className="flex flex-col p-8 items-start max-md:max-w-full max-md:px-5 bg-card hover:bg-card/70 text-card-foreground lg:w-[49%]"
+      className="flex flex-col p-4 md:p-6 items-start max-md:max-w-full bg-card hover:bg-card/70 text-card-foreground md:w-[49%]"
       href={doc.slug}
       title={doc.title}
       key={doc._id}
     >
       {PostsDateAndReadTime(doc, currentLang)}
-      <h3 className="text-2xl font-bold leading-8 mt-4">{doc.title}</h3>
+      <h3 className="text-2xl font-bold leading-8">{doc.title}</h3>
       <p className="leading-8 mt-2">{doc.description}</p>
     </Link>
   );
@@ -135,13 +135,12 @@ function PostsDocs(doc: Docs, currentLang: string) {
 
 function PostsDateAndReadTime(doc: Docs, currentLang: string) {
   return (
-    <div className="text-sm font-medium leading-5 flex items-center">
-      <span className="flex items-center">
+    <div className="w-full text-sm font-medium leading-5 md:flex md:items-center md:justify-between">
+      <span className="flex items-center mb-4">
         <Icons.calendarClock className="mr-1" width={20} height={20} />
         {dateToString(doc.date, currentLang)}
       </span>
-      <span className="m-1">|</span>
-      <span className="flex items-center">
+      <span className="flex items-center mb-4">
         <Icons.hourglass className="mr-1" width={20} height={20} />
         {useReadingTimeToNumeric(doc.readTime)} {Translate("read_time")}
       </span>
