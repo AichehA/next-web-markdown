@@ -57,7 +57,7 @@ export function Search() {
               .filter((docs) => {
                 return JSON.stringify(
                   `${docs.title} ${docs.description} ${docs.body.raw}`.toLowerCase()
-                ).includes(search);
+                ).includes(search.toLowerCase());
               })
               .map((doc) => {
                 return doc._id;

@@ -52,7 +52,7 @@ export async function generateMetadata({
       url: "https://aicheha.github.io/next-web-markdown" + doc.slug,
       images: [
         {
-          url: "https://images.pexels.com/photos/5409751/pexels-photo-5409751.jpeg",
+          url: "/next-web-markdown/background_1.jpg",
           width: 1200,
           height: 630,
           alt: doc.title,
