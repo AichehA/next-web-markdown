@@ -1,3 +1,4 @@
+import * as React from "react";
 import { cn } from "@/lib/utils";
 import appConfig from "app-config";
 import { LangugeSwitch } from "@/components/languge-switch";
@@ -5,6 +6,13 @@ import { ColorModeSwitch } from "@/components/color-mode-switch";
 import Link from "next/link";
 import { useLang } from "@/hooks/use-lang";
 import { Search } from "@/components/search";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetHeader,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 interface routerModel {
   title: string;
@@ -14,8 +22,40 @@ interface routerModel {
 
 const router: routerModel[] = appConfig.menuNavigation;
 
+function navigation({ currentLang, currentSlug, isMobile = false, callBack }) {
+  return (
+    <nav
+      className={cn(
+        isMobile
+          ? "flex flex-col space-y-3 ml-3"
+          : "hidden md:flex md:items-center md:space-x-6 md:text-sm md:font-medium"
+      )}
+    >
+      {router
+        .filter((value) => value.lang === currentLang)
+        .map((value, index) => (
+          <Link
+            key={index}
+            className={cn(
+              "transition-colors hover:text-foreground/80 text-foreground/60",
+              value.link === currentSlug
+                ? "transition-colors hover:text-foreground/80 text-foreground"
+                : ""
+            )}
+            href={value.link}
+            onClick={callBack}
+          >
+            {value.title}
+          </Link>
+        ))}
+    </nav>
+  );
+}
+
 export function Header() {
   const { getCurrentSlug, getCurrentLang } = useLang();
+
+  const [open, setOpen] = React.useState(false);
 
   return (
     <header
@@ -35,30 +75,44 @@ export function Header() {
             "flex flex-1 items-center justify-between space-x-2 md:justify-end"
           )}
         >
-          <nav
-            className={cn("flex items-center space-x-6 text-sm font-medium")}
-          >
-            {router
-              .filter((value) => value.lang === getCurrentLang)
-              .map((value, index) => (
-                <Link
-                  key={index}
-                  className={cn(
-                    "transition-colors hover:text-foreground/80 text-foreground/60",
-                    value.link === getCurrentSlug
-                      ? "transition-colors hover:text-foreground/80 text-foreground"
-                      : ""
-                  )}
-                  href={value.link}
-                >
-                  {value.title}
+          <Sheet open={open} onOpenChange={setOpen}>
+            <SheetTrigger asChild>
+              <span
+                className={cn(
+                  "flex items-center space-x-2 cursor-pointer md:hidden"
+                )}
+              >
+                {appConfig.title}
+              </span>
+            </SheetTrigger>
+            <SheetContent side="left">
+              <SheetHeader>
+                <Link href="/" className={cn("space-x-2 font-bold")}>
+                  {appConfig.title}
                 </Link>
-              ))}
-          </nav>
-          <nav className={cn("flex items-center")}>
-            <Search />
+                <SheetClose asChild>
+                  <div className="flex">
+                    <LangugeSwitch />
+                  </div>
+                </SheetClose>
+              </SheetHeader>
+              {navigation({
+                currentLang: getCurrentLang,
+                currentSlug: getCurrentSlug,
+                isMobile: true,
+                callBack: () => setOpen(false),
+              })}
+            </SheetContent>
+          </Sheet>
+          {navigation({
+            currentLang: getCurrentLang,
+            currentSlug: getCurrentSlug,
+            callBack: () => {},
+          })}
+          <div className={cn("flex flex-1 items-center md:flex-initial")}>
+            <Search className={cn("w-full md:w-auto")} />
             <ColorModeSwitch />
-          </nav>
+          </div>
         </div>
       </div>
     </header>

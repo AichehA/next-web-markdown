@@ -16,8 +16,9 @@ import {
 } from "@/components/ui/command";
 import { Button } from "@/components/ui/button";
 import { Translate } from "@/components/ui/translate";
+import { cn } from "@/lib/utils";
 
-export function Search() {
+export function Search({ className }) {
   const { getCurrentLang } = useLang();
   const router = useRouter();
   const [open, setOpen] = React.useState(false);
@@ -40,7 +41,7 @@ export function Search() {
       <Button
         type="button"
         variant="ghost"
-        className="border"
+        className={cn("border", className)}
         onClick={() => setOpen((open) => !open)}
       >
         <span className="inline-flex mr-2">
