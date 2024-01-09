@@ -28,7 +28,7 @@ function navigation({ currentLang, currentSlug, isMobile = false, callBack }) {
       className={cn(
         isMobile
           ? "flex flex-col space-y-3 ml-3"
-          : "hidden md:flex md:items-center md:space-x-6 md:text-sm md:font-medium"
+          : "hidden md:flex md:items-center md:space-x-4 md:text-sm md:font-medium"
       )}
     >
       {router

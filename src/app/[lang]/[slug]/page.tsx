@@ -4,21 +4,25 @@ import { DocsPageHeader } from "@/components/page-header";
 import { allPages } from "contentlayer/generated";
 import { notFound } from "next/navigation";
 
-interface HomePageProps {
+interface PagesProps {
   params: {
     lang: string;
+    slug: string;
   };
 }
 
 export async function generateStaticParams() {
-  return allPages.map((doc) => ({
-    lang: doc.lang,
+  return allPages.map((page) => ({
+    lang: page.lang,
+    slug: page.slugAsParams,
   }));
 }
 
-async function getDocFromParams(lang: string) {
+async function getDocFromParams(lang: string, slug: string) {
+  const slugPath = slug || "";
+
   const doc = allPages.find(
-    (home) => home.slugAsParams === "home" && home.lang === lang
+    (page) => page.slugAsParams === slugPath && page.lang === lang
   );
 
   if (!doc) {
@@ -30,8 +34,8 @@ async function getDocFromParams(lang: string) {
 
 export async function generateMetadata({
   params,
-}: HomePageProps): Promise<Metadata> {
-  const doc = await getDocFromParams(params.lang);
+}: PagesProps): Promise<Metadata> {
+  const doc = await getDocFromParams(params.lang, params.slug);
 
   if (!doc) {
     return {};
@@ -69,8 +73,8 @@ export async function generateMetadata({
   };
 }
 
-export default async function Home({ params }: HomePageProps) {
-  const doc = await getDocFromParams(params.lang);
+export default async function Page({ params }: PagesProps) {
+  const doc = await getDocFromParams(params.lang, params.slug);
 
   if (!doc) {
     notFound();
@@ -78,7 +82,7 @@ export default async function Home({ params }: HomePageProps) {
 
   return (
     <main className="min-h-screen">
-      <DocsPageHeader heading={doc.title} text={doc.description} mode="home" />
+      <DocsPageHeader heading={doc.title} text={doc.description} />
       <div className="container">
         <Mdx code={doc.body.code} />
       </div>

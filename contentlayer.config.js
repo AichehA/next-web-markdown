@@ -17,14 +17,6 @@ const computedFields = {
         : `/${doc._raw.flattenedPath}`;
     },
   },
-  slugAsParams: {
-    type: "string",
-    resolve: (doc) => {
-      const path = doc._raw.flattenedPath;
-      const pathArray = path.split("/");
-      return pathArray.slice(2).join("/");
-    },
-  },
   readTime: {
     type: "string",
     resolve: (post) => {
@@ -69,12 +61,22 @@ export const Docs = defineDocumentType(() => ({
       default: true,
     },
   },
-  computedFields,
+  computedFields: {
+    slugAsParams: {
+      type: "string",
+      resolve: (doc) => {
+        const path = doc._raw.flattenedPath;
+        const pathArray = path.split("/");
+        return pathArray.slice(2).join("/");
+      },
+    },
+    ...computedFields,
+  },
 }));
 
-export const Homes = defineDocumentType(() => ({
-  name: "Homes",
-  filePathPattern: `**/home.mdx`,
+export const Pages = defineDocumentType(() => ({
+  name: "Pages",
+  filePathPattern: `**/*.mdx`,
   contentType: "mdx",
   fields: {
     title: {
@@ -89,12 +91,22 @@ export const Homes = defineDocumentType(() => ({
       default: true,
     },
   },
-  computedFields,
+  computedFields: {
+    slugAsParams: {
+      type: "string",
+      resolve: (doc) => {
+        const path = doc._raw.flattenedPath;
+        const pathArray = path.split("/");
+        return pathArray.slice(1).toString();
+      },
+    },
+    ...computedFields,
+  },
 }));
 
 export default makeSource({
   contentDirPath: "./src/content",
-  documentTypes: [Docs, Homes],
+  documentTypes: [Docs, Pages],
   mdx: {
     remarkPlugins: [remarkGfm, remarkMath],
     rehypePlugins: [

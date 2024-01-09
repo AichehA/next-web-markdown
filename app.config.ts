@@ -23,13 +23,13 @@ const appConfig = {
       lang: "en",
     },
     {
-      title: "Exemple toto",
-      link: "/fr/docs/toto",
+      title: "A propos",
+      link: "/fr/about",
       lang: "fr",
     },
     {
-      title: "Example toto",
-      link: "/en/docs/toto",
+      title: "About",
+      link: "/en/about",
       lang: "en",
     },
   ],

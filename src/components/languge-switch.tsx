@@ -3,7 +3,7 @@
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
 import { useLang } from "@/hooks/use-lang";
-import { allDocs, allHomes } from "contentlayer/generated";
+import { allDocs, allPages } from "contentlayer/generated";
 import appConfig from "app-config";
 
 export function LangugeSwitch() {
@@ -17,7 +17,7 @@ export function LangugeSwitch() {
       : "/" + lang;
   });
 
-  const allData = [...allDocs, ...allHomes];
+  const allData = [...allDocs, ...allPages];
 
   /**
    * Permet de filtrer si l'article est disponible dans plusieurs langues.
