@@ -3,7 +3,6 @@
 import * as React from "react";
 import { allDocs } from "contentlayer/generated";
 import { useRouter } from "next/navigation";
-import { useLang } from "@/hooks/use-lang";
 import {
   Command,
   CommandDialog,
@@ -17,9 +16,10 @@ import {
 import { Button } from "@/components/ui/button";
 import { Translate } from "@/components/ui/translate";
 import { cn } from "@/lib/utils";
+import { AppContext } from "@/hooks/use-app-context";
 
 export function Search({ className }) {
-  const { getCurrentLang } = useLang();
+  const { getCurrentLang } = React.useContext(AppContext);
   const router = useRouter();
   const [open, setOpen] = React.useState(false);
   const allData = allDocs.filter((data) => data.lang === getCurrentLang);

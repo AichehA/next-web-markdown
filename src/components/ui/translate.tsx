@@ -2,8 +2,8 @@
 
 import * as React from "react";
 import { Icons } from "../icons";
-import { useLang } from "@/hooks/use-lang";
 import appConfig from "app-config";
+import { AppContext } from "@/hooks/use-app-context";
 
 function findValueByKey(object, key) {
   let value;
@@ -23,7 +23,7 @@ function findValueByKey(object, key) {
 }
 
 export const Translate = (keyTranslate: string) => {
-  const { getCurrentLang } = useLang();
+  const { getCurrentLang } = React.useContext(AppContext);
 
   const data = appConfig.langTranslates[getCurrentLang];
 

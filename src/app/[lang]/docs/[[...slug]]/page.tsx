@@ -6,6 +6,7 @@ import { DocsPageHeader } from "@/components/page-header";
 import { DashboardTableOfContents } from "@/components/toc";
 import { getTableOfContents } from "@/lib/toc";
 import { allDocs } from "contentlayer/generated";
+import { cn } from "@/lib/utils";
 
 interface DocPageProps {
   params: {
@@ -83,19 +84,30 @@ export default async function DocPage({ params }: DocPageProps) {
     notFound();
   }
 
+  const isIndex = doc._raw.sourceFilePath.includes("index.mdx");
+
   const toc = await getTableOfContents(doc.body.raw);
 
   return (
-    <main className="container relative py-6 lg:gap-10 lg:py-10 xl:grid xl:grid-cols-[1fr_300px]">
-      <div className="mx-auto w-full min-w-0">
-        <DocsPageHeader heading={doc.title} text={doc.description} />
-        <p>{doc.readTime} min read</p>
-        <Mdx code={doc.body.code} />
-        <hr className="my-4 md:my-6" />
-      </div>
-      <div className="hidden text-sm xl:block">
-        <div className="sticky top-16 -mt-10 max-h-[calc(var(--vh)-4rem)] overflow-y-auto pt-10">
-          <DashboardTableOfContents toc={toc} />
+    <main className="min-h-screen">
+      <DocsPageHeader heading={doc.title} text={doc.description} mode="post" />
+      <div className="container mt-4">
+        <div className="flex md:gap-4">
+          <div
+            className={cn(
+              "mx-auto min-w-0 w-full",
+              isIndex ? null : "xl:w-[75%]"
+            )}
+          >
+            <Mdx code={doc.body.code} />
+          </div>
+          {isIndex ? null : (
+            <div className="hidden text-sm xl:block w-[25%]">
+              <div className="sticky top-16 max-h-[calc(var(--vh)-4rem)] overflow-y-auto">
+                <DashboardTableOfContents toc={toc} />
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </main>

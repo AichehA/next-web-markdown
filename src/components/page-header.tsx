@@ -39,13 +39,17 @@ export function DocsPageHeader({
           </div>
         </section>
       ) : (
-        <>
-          <div className={cn("space-y-4", className)} {...props}>
+        <section
+          className={cn(
+            "h-[300px] md:h-[400px] bg-card flex items-center justify-center border-b",
+            className
+          )}
+        >
+          <div className={cn("space-y-4", className)}>
             <h1 className="text-4xl lg:text-5xl">{heading}</h1>
             {text && <p className="text-xl text-muted-foreground">{text}</p>}
           </div>
-          <hr className="my-4" />
-        </>
+        </section>
       )}
     </>
   );

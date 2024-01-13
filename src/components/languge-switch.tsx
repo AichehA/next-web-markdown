@@ -1,13 +1,14 @@
 "use client";
 
+import appConfig from "app-config";
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
-import { useLang } from "@/hooks/use-lang";
 import { allDocs, allPages } from "contentlayer/generated";
-import appConfig from "app-config";
+import { AppContext } from "@/hooks/use-app-context";
+import { useContext } from "react";
 
 export function LangugeSwitch() {
-  const { getCurrentSlug, getCurrentLang } = useLang();
+  const { getCurrentSlug, getCurrentLang } = useContext(AppContext);
   const { push } = useRouter();
 
   const potentialPath = appConfig.langs.map((lang) => {

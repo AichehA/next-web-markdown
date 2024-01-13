@@ -4,7 +4,6 @@ import appConfig from "app-config";
 import { LangugeSwitch } from "@/components/languge-switch";
 import { ColorModeSwitch } from "@/components/color-mode-switch";
 import Link from "next/link";
-import { useLang } from "@/hooks/use-lang";
 import { Search } from "@/components/search";
 import {
   Sheet,
@@ -13,6 +12,7 @@ import {
   SheetHeader,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { AppContext } from "@/hooks/use-app-context";
 
 interface routerModel {
   title: string;
@@ -53,7 +53,7 @@ function navigation({ currentLang, currentSlug, isMobile = false, callBack }) {
 }
 
 export function Header() {
-  const { getCurrentSlug, getCurrentLang } = useLang();
+  const { getCurrentSlug, getCurrentLang } = React.useContext(AppContext);
 
   const [open, setOpen] = React.useState(false);
 

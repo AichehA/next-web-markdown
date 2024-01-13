@@ -1,13 +1,12 @@
 "use client";
 
-import { useLang } from "@/hooks/use-lang";
-import { cn, dateToString } from "@/lib/utils";
+import { cn } from "@/lib/utils";
+import { PostsDateAndReadTime } from "@/components/ui/posts-date-read";
 import { Docs, allDocs } from "contentlayer/generated";
 import Image from "next/image";
 import Link from "next/link";
-import { Icons } from "@/components/icons";
-import { useReadingTimeToNumeric } from "@/hooks/use-reading-time";
-import { Translate } from "@/components/ui/translate";
+import { useContext } from "react";
+import { AppContext } from "@/hooks/use-app-context";
 
 interface PostsProps {
   children?: React.ReactNode;
@@ -23,7 +22,8 @@ export function Posts({
   allPostsTitle,
   allPostsBtn,
 }: PostsProps) {
-  const { getCurrentLang } = useLang();
+  const { getCurrentLang } = useContext(AppContext);
+
   const allData = allDocs.filter((data) => data.lang === getCurrentLang);
   const features = allData
     .filter((docs) => docs._id.includes("index") === false)
@@ -61,7 +61,7 @@ export function Posts({
         </div>
         <div className="flex justify-center items-center mt-4 mb-4">
           <Link
-            href={`en/docs`}
+            href={`${getCurrentLang}/docs`}
             title={"all docs"}
             className={cn(
               "text-lg font-bold leading-6 px-16 py-4 self-start inline-flex items-center justify-center whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90"
@@ -130,20 +130,5 @@ function PostsDocs(doc: Docs, currentLang: string) {
       <h3 className="text-2xl font-bold leading-8">{doc.title}</h3>
       <p className="leading-8 mt-2">{doc.description}</p>
     </Link>
-  );
-}
-
-function PostsDateAndReadTime(doc: Docs, currentLang: string) {
-  return (
-    <div className="w-full text-sm font-medium leading-5 md:flex md:items-center md:justify-between">
-      <span className="flex items-center mb-4">
-        <Icons.calendarClock className="mr-1" width={20} height={20} />
-        {dateToString(doc.date, currentLang)}
-      </span>
-      <span className="flex items-center mb-4">
-        <Icons.hourglass className="mr-1" width={20} height={20} />
-        {useReadingTimeToNumeric(doc.readTime)} {Translate("read_time")}
-      </span>
-    </div>
   );
 }

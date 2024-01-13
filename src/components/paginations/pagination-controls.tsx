@@ -80,7 +80,7 @@ const PaginationControls: FC<PaginationControlsProps> = ({
   ];
 
   return (
-    <div className="flex gap-2 items-center">
+    <div className="flex gap-2 items-center mt-4 mb-4">
       {hasPrevPage ? (
         <Link
           href={`docs?page=${currentPageProps - 1}`}
