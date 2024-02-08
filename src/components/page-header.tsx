@@ -6,8 +6,6 @@ interface DocsPageHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   mode?: "home" | "post";
 }
 
-// TODO Changer l'url du backgroundImage avec de la configuration
-
 export function DocsPageHeader({
   heading,
   text,
@@ -15,6 +13,11 @@ export function DocsPageHeader({
   mode = "post",
   ...props
 }: DocsPageHeaderProps) {
+  const appRepo = process.env.NEXT_PUBLIC_APP_REPO;
+  const urlImage = appRepo
+    ? `/${appRepo}/background_1.jpg`
+    : `/background_1.jpg`;
+
   return (
     <>
       {mode === "home" ? (
@@ -25,7 +28,7 @@ export function DocsPageHeader({
           )}
           {...props}
           style={{
-            backgroundImage: `url('/next-web-markdown/background_1.jpg')`,
+            backgroundImage: `url(${urlImage})`,
           }}
         >
           <div className="absolute h-full w-full bg-secondary opacity-60 left-0 top-0;"></div>

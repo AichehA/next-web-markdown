@@ -37,7 +37,8 @@ export async function generateMetadata({
     return {};
   }
 
-  // const url = env.NEXT_PUBLIC_APP_URL
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL;
+  const appRepo = process.env.NEXT_PUBLIC_APP_REPO;
 
   //   const ogUrl = new URL(`${url}/api/og`)
   //   ogUrl.searchParams.set("heading", doc.description ?? doc.title)
@@ -51,10 +52,10 @@ export async function generateMetadata({
       title: doc.title,
       description: doc.description,
       type: "article",
-      url: "https://aicheha.github.io/next-web-markdown" + doc.slug,
+      url: `${appUrl}${appRepo}/${doc.slug}`,
       images: [
         {
-          url: "https://aicheha.github.io/next-web-markdown/next-web-markdown/background_1.jpg",
+          url: `${appUrl}${appRepo}/background_1.jpg`,
           width: 1200,
           height: 630,
           alt: doc.title,

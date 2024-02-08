@@ -1,6 +1,6 @@
-const repo = "next-web-markdown";
-const assetPrefix = `/${repo}/`;
-const basePath = `/${repo}`;
+const appRepo = process.env.NEXT_PUBLIC_APP_REPO;
+const assetPrefix = appRepo ? `/${appRepo}/` : "";
+const basePath = appRepo ? `/${appRepo}` : "";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {

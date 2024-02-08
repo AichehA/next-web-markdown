@@ -27,11 +27,12 @@ pnpm dev
 ## Todos
 
 - [X] Renommage de la config "app.config.json" en "app.config.ts".
-- [ ] Fichier json par langue pour les textes fixe par page / composant.
+- [X] Fichier json par langue pour les textes fixe par page / composant.
   - [X] Changement de la configuration pour la placer dans le fichier global "app.config.ts".
-  - [ ] Mise en place de la traduction sur toute l'application.
+  - [X] Mise en place de la traduction sur toute l'application.
 - [X] Lien des pages de la navigation principal en multi dans le fichier global "app.config.ts".
-- [ ] Recherche plus complète
+- [X] Recherche plus complète
 - [X] Toggle sur le button dark mode
+- [X] Configuration dev / production
 - [ ] Génération d'un flux feed.xml
 - [ ] Faire la page 404
