@@ -7,5 +7,10 @@
   "toc": {
     "title": "Summary"
   },
-  "read_time": "read time"
+  "read_time": "read time",
+  "page_not_found": {
+    "title": "Page not found",
+    "description": "This page could not be found.",
+    "back_to_home": "Return to home page"
+  }
 }

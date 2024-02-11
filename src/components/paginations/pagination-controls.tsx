@@ -85,9 +85,7 @@ const PaginationControls: FC<PaginationControlsProps> = ({
         <Link
           href={`docs?page=${currentPageProps - 1}`}
           title={`Page ${currentPageProps - 1}`}
-          className={cn(
-            "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-2 py-2"
-          )}
+          className={cn("btn-link-primary")}
         >
           <Icons.chevronLeft />
         </Link>
@@ -136,9 +134,7 @@ const PaginationControls: FC<PaginationControlsProps> = ({
         <Link
           href={`docs?page=${currentPageProps + 1}`}
           title={`Page ${currentPageProps + 1}`}
-          className={cn(
-            "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-2 py-2"
-          )}
+          className={cn("btn-link-primary")}
         >
           <Icons.chevronRight />
         </Link>

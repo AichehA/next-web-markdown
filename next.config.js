@@ -7,7 +7,7 @@ const nextConfig = {
   reactStrictMode: true,
   assetPrefix: assetPrefix,
   basePath: basePath,
-  output: "export",
+  output: process.env.NODE_ENV === "development" ? undefined : "export",
   images: {
     unoptimized: true,
   },

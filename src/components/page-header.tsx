@@ -1,18 +1,18 @@
 import { cn } from "@/lib/utils";
 
-interface DocsPageHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
+interface PageHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   heading: string;
   text?: string;
   mode?: "home" | "post";
 }
 
-export function DocsPageHeader({
+export function PageHeader({
   heading,
   text,
   className,
   mode = "post",
   ...props
-}: DocsPageHeaderProps) {
+}: PageHeaderProps) {
   const appRepo = process.env.NEXT_PUBLIC_APP_REPO;
   const urlImage = appRepo
     ? `/${appRepo}/background_1.jpg`
@@ -39,6 +39,7 @@ export function DocsPageHeader({
             {text && (
               <p className="text-xl text-primary-foreground mt-4">{text}</p>
             )}
+            {props.children && <div {...props} />}
           </div>
         </section>
       ) : (
@@ -51,6 +52,7 @@ export function DocsPageHeader({
           <div className={cn("space-y-4", className)}>
             <h1 className="text-4xl lg:text-5xl">{heading}</h1>
             {text && <p className="text-xl text-muted-foreground">{text}</p>}
+            {props.children && <div {...props} />}
           </div>
         </section>
       )}

@@ -1,8 +1,9 @@
 import { Metadata } from "next";
 import { Mdx } from "@/components/mdx-components";
-import { DocsPageHeader } from "@/components/page-header";
+import { PageHeader } from "@/components/page-header";
 import { allPages } from "contentlayer/generated";
 import { notFound } from "next/navigation";
+import { translateText } from "@/lib/translate-text";
 
 interface PagesProps {
   params: {
@@ -38,7 +39,10 @@ export async function generateMetadata({
   const doc = await getDocFromParams(params.lang, params.slug);
 
   if (!doc) {
-    return {};
+    return {
+      title: translateText(params.lang, "page_not_found.title"),
+      description: translateText(params.lang, "page_not_found.description"),
+    };
   }
 
   const appUrl = process.env.NEXT_PUBLIC_APP_URL;
@@ -83,7 +87,7 @@ export default async function Page({ params }: PagesProps) {
 
   return (
     <main className="min-h-screen">
-      <DocsPageHeader heading={doc.title} text={doc.description} />
+      <PageHeader heading={doc.title} text={doc.description} />
       <div className="container">
         <Mdx code={doc.body.code} />
       </div>
