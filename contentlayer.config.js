@@ -86,6 +86,9 @@ export const Pages = defineDocumentType(() => ({
     description: {
       type: "string",
     },
+    cover: {
+      type: "string",
+    },
     published: {
       type: "boolean",
       default: true,

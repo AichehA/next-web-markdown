@@ -28,6 +28,7 @@ const config: Config = {
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
+          opacity: "hsla(var(--secondary-opacity))",
         },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",

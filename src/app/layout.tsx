@@ -24,7 +24,7 @@ export default function RootLayout({
 
   return (
     <AppContext.Provider value={{ getCurrentSlug, getCurrentLang }}>
-      <html lang={getCurrentLang}>
+      <html lang={getCurrentLang} suppressHydrationWarning>
         <body className={inter.className}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <Header />

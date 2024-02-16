@@ -3,20 +3,20 @@ import { cn } from "@/lib/utils";
 interface PageHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   heading: string;
   text?: string;
+  cover?: string;
   mode?: "home" | "post";
 }
 
 export function PageHeader({
   heading,
   text,
+  cover,
   className,
   mode = "post",
   ...props
 }: PageHeaderProps) {
   const appRepo = process.env.NEXT_PUBLIC_APP_REPO;
-  const urlImage = appRepo
-    ? `/${appRepo}/background_1.jpg`
-    : `/background_1.jpg`;
+  const urlImage = appRepo ? `/${appRepo}/${cover}` : `/${cover}`;
 
   return (
     <>
@@ -27,9 +27,13 @@ export function PageHeader({
             className
           )}
           {...props}
-          style={{
-            backgroundImage: `url(${urlImage})`,
-          }}
+          style={
+            cover
+              ? {
+                  backgroundImage: `url(${urlImage})`,
+                }
+              : {}
+          }
         >
           <div className="absolute h-full w-full bg-secondary opacity-60 left-0 top-0;"></div>
           <div className="absolute max-w-[800px] h-[200px] translate-y-[-70%] left-8 top-2/4">
@@ -48,8 +52,17 @@ export function PageHeader({
             "h-[300px] md:h-[400px] bg-card flex items-center justify-center border-b",
             className
           )}
+          style={
+            cover
+              ? {
+                  backgroundImage: `url(${urlImage})`,
+                }
+              : {}
+          }
         >
-          <div className={cn("space-y-4", className)}>
+          <div
+            className={cn("space-y-4 bg-secondary-opacity w-full text-center")}
+          >
             <h1 className="text-4xl lg:text-5xl">{heading}</h1>
             {text && <p className="text-xl text-muted-foreground">{text}</p>}
             {props.children && <div {...props} />}

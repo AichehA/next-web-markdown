@@ -67,7 +67,7 @@ export async function generateMetadata({
       url: `${appUrl}${appRepo}/${doc.slug}`,
       images: [
         {
-          url: `${appUrl}${appRepo}/background_1.jpg`,
+          url: `${appUrl}${appRepo}/${doc.cover}`,
           width: 1200,
           height: 630,
           alt: doc.title,
@@ -95,7 +95,11 @@ export default async function DocPage({ params }: DocPageProps) {
 
   return (
     <main className="min-h-screen">
-      <PageHeader heading={doc.title} text={doc.description} mode="post" />
+      <PageHeader
+        heading={doc.title}
+        text={doc.description}
+        cover={doc.cover}
+      />
       <div className="container mt-4">
         <div className="flex md:gap-4">
           <div

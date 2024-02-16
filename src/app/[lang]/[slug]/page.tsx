@@ -22,23 +22,23 @@ export async function generateStaticParams() {
 async function getDocFromParams(lang: string, slug: string) {
   const slugPath = slug || "";
 
-  const doc = allPages.find(
+  const page = allPages.find(
     (page) => page.slugAsParams === slugPath && page.lang === lang
   );
 
-  if (!doc) {
+  if (!page) {
     null;
   }
 
-  return doc;
+  return page;
 }
 
 export async function generateMetadata({
   params,
 }: PagesProps): Promise<Metadata> {
-  const doc = await getDocFromParams(params.lang, params.slug);
+  const page = await getDocFromParams(params.lang, params.slug);
 
-  if (!doc) {
+  if (!page) {
     return {
       title: translateText(params.lang, "page_not_found.title"),
       description: translateText(params.lang, "page_not_found.description"),
@@ -49,47 +49,51 @@ export async function generateMetadata({
   const appRepo = process.env.NEXT_PUBLIC_APP_REPO;
 
   //   const ogUrl = new URL(`${url}/api/og`)
-  //   ogUrl.searchParams.set("heading", doc.description ?? doc.title)
+  //   ogUrl.searchParams.set("heading", page.description ?? page.title)
   //   ogUrl.searchParams.set("type", "Documentation")
   //   ogUrl.searchParams.set("mode", "dark")
 
   return {
-    title: doc.title,
-    description: doc.description,
+    title: page.title,
+    description: page.description,
     openGraph: {
-      title: doc.title,
-      description: doc.description,
+      title: page.title,
+      description: page.description,
       type: "article",
-      url: `${appUrl}${appRepo}/${doc.slug}`,
+      url: `${appUrl}${appRepo}/${page.slug}`,
       images: [
         {
-          url: `${appUrl}${appRepo}/background_1.jpg`,
+          url: `${appUrl}${appRepo}/${page.cover}`,
           width: 1200,
           height: 630,
-          alt: doc.title,
+          alt: page.title,
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: doc.title,
-      description: doc.description,
+      title: page.title,
+      description: page.description,
     },
   };
 }
 
 export default async function Page({ params }: PagesProps) {
-  const doc = await getDocFromParams(params.lang, params.slug);
+  const page = await getDocFromParams(params.lang, params.slug);
 
-  if (!doc) {
+  if (!page) {
     notFound();
   }
 
   return (
     <main className="min-h-screen">
-      <PageHeader heading={doc.title} text={doc.description} />
+      <PageHeader
+        heading={page.title}
+        text={page.description}
+        cover={page.cover}
+      />
       <div className="container">
-        <Mdx code={doc.body.code} />
+        <Mdx code={page.body.code} />
       </div>
     </main>
   );
