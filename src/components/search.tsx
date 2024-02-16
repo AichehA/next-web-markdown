@@ -45,7 +45,7 @@ export function Search({ className }) {
         onClick={() => setOpen((open) => !open)}
       >
         <span className="inline-flex mr-2">
-          {Translate("search.search_bar_name")}
+          {Translate("search.search_bar_name", getCurrentLang)}
         </span>
         <kbd className="pointer-events-none right-1.5 top-1.5 hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
           <span>⌘</span>K
@@ -67,9 +67,13 @@ export function Search({ className }) {
             return 0;
           }}
         >
-          <CommandInput placeholder={Translate("search.placeholder")} />
+          <CommandInput
+            placeholder={Translate("search.placeholder", getCurrentLang)}
+          />
           <CommandList>
-            <CommandEmpty>{Translate("search.search_not_found")}</CommandEmpty>
+            <CommandEmpty>
+              {Translate("search.search_not_found", getCurrentLang)}
+            </CommandEmpty>
             <CommandGroup heading="Documentation">
               {allData.map((item) => {
                 return (

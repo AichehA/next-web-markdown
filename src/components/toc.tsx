@@ -6,12 +6,14 @@ import { TableOfContents, Item } from "@/lib/toc";
 import { cn } from "@/lib/utils";
 import { useMounted } from "@/hooks/use-mounted";
 import { Translate } from "@/components/ui/translate";
+import { AppContext } from "@/hooks/use-app-context";
 
 interface TocProps {
   toc: TableOfContents;
 }
 
 export function DashboardTableOfContents({ toc }: TocProps) {
+  const { getCurrentLang } = React.useContext(AppContext);
   const itemIds = React.useMemo(
     () =>
       toc.items
@@ -30,7 +32,7 @@ export function DashboardTableOfContents({ toc }: TocProps) {
     return null;
   }
 
-  const tocTitle = <>{Translate("toc.title")}</>;
+  const tocTitle = <>{Translate("toc.title", getCurrentLang)}</>;
 
   return mounted ? (
     <div className="space-y-2">
