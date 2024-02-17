@@ -24,6 +24,17 @@ pnpm install
 pnpm dev
 ```
 
+## devDependencies :
+
+- Downgrade de remark-gfm 4.0.0 -> 3.0.1 
+
+Il y a un bug de compination sur certain caractaire : 
+
+Exemple de format non accepter en 4.0.0 : `test`
+
+https://github.com/contentlayerdev/contentlayer/issues/558
+
+
 ## Todos
 
 - [x] Renommage de la config "app.config.json" en "app.config.ts".
