@@ -42,6 +42,7 @@ export function DocsPaginationList({ perPage }: DocsPaginationListProps) {
         setPage(pageCount);
         setLoading(false);
       } else if (searchParamPageNumber <= 0) {
+        setPage(1);
         setLoading(false);
       } else {
         setPage(searchParamPageNumber);
@@ -66,7 +67,7 @@ export function DocsPaginationList({ perPage }: DocsPaginationListProps) {
     <div className="flex flex-col gap-2 items-center">
       {entries.map((doc) => (
         <Link
-          className="flex flex-col p-4 md:p-6 items-start max-md:max-w-full bg-card hover:bg-card/70 text-card-foreground w-full"
+          className="border border-muted-foreground flex flex-col p-4 md:p-6 items-start max-md:max-w-full bg-card hover:bg-card/70 text-card-foreground w-full"
           href={doc.slug}
           title={doc.title}
           key={doc._id}

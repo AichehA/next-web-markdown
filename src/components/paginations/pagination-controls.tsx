@@ -105,7 +105,7 @@ const PaginationControls: FC<PaginationControlsProps> = ({
           key={index}
           className={cn(
             item !== "ellipsis"
-              ? "w-7 h-7 border-2 flex justify-center rounded-xl bg-primary text-primary-foreground shadow hover:bg-primary/90"
+              ? "w-7 h-7 border-2 border-muted-foreground flex justify-center rounded-xl bg-primary text-primary-foreground shadow hover:bg-primary/90"
               : "w-7 h-7 flex justify-center rounded-xl",
             item === currentPageProps
               ? "bg-secondary text-secondary-foreground hover:bg-secondary/90"

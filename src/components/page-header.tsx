@@ -35,7 +35,7 @@ export function PageHeader({
               : {}
           }
         >
-          <div className="absolute h-full w-full bg-secondary opacity-60 left-0 top-0;"></div>
+          <div className="absolute h-full w-full bg-shadow opacity-60 left-0 top-0;"></div>
           <div className="absolute max-w-[800px] h-[200px] translate-y-[-70%] left-8 top-2/4">
             <h1 className="text-4xl lg:text-5xl text-primary font-bold">
               {heading}
@@ -63,8 +63,10 @@ export function PageHeader({
           <div
             className={cn("space-y-4 bg-secondary-opacity w-full text-center")}
           >
-            <h1 className="text-4xl lg:text-5xl">{heading}</h1>
-            {text && <p className="text-xl text-muted-foreground">{text}</p>}
+            <h1 className="text-4xl lg:text-5xl text-primary font-bold">
+              {heading}
+            </h1>
+            {text && <p className="text-xl text-primary-foreground">{text}</p>}
             {props.children && <div {...props} />}
           </div>
         </section>

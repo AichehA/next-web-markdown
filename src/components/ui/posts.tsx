@@ -81,7 +81,7 @@ function FeaturePostsDocs(
   currentLang: string
 ) {
   return (
-    <div className="border flex justify-around flex-col w-full p-4 md:p-6 border-solid mb-2 bg-card gap-5 text-card-foreground md:flex-row">
+    <div className="border border-muted-foreground flex justify-around flex-col w-full p-4 md:p-6 border-solid mb-2 bg-card gap-5 text-card-foreground md:flex-row">
       {doc.cover ? (
         <div className="flex flex-col items-stretch w-[45%] max-md:w-full max-md:ml-0">
           <Image
@@ -121,7 +121,7 @@ function FeaturePostsDocs(
 function PostsDocs(doc: Docs, currentLang: string) {
   return (
     <Link
-      className="flex flex-col p-4 md:p-6 items-start max-md:max-w-full bg-card hover:bg-card/70 text-card-foreground md:w-[49%]"
+      className="border border-muted-foreground flex flex-col p-4 md:p-6 items-start max-md:max-w-full bg-card hover:bg-card/70 text-card-foreground md:w-[49%]"
       href={doc.slug}
       title={doc.title}
       key={doc._id}
